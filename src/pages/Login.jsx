@@ -1,10 +1,22 @@
 import {useState} from "react"
 
+//guarda o valor digitado no campo de email e senha
 function Login() {
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("") 
   const [senha, setSenha] = useState("")
 
+  //guarda a mensagem de erro do formulario
+  const [erro, setErro] = useState("")
+
+  //executa quando o usuário clica no botão "Entrar"
   const handleLogin = () => {
+    if(!email || !senha){
+    setErro("Preencha e-mail e senha.")
+      return
+    }
+
+    setErro("")
+
     console.log("E-mail:", email)
     console.log("Senha:", senha)
   }
@@ -30,7 +42,7 @@ function Login() {
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}  // Atualiza o estado sempre que o usuário digita
             placeholder="Digite seu e-mail"
             className="w-full border border-gray-300 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -44,14 +56,20 @@ function Login() {
           <input
             type="password"
             value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            onChange={(e) => setSenha(e.target.value)}  // Atualiza o estado sempre que o usuário digita
             placeholder="Digite sua senha"
             className="w-full border border-gray-300 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
+        {erro && (
+          <p className="text-red-500 text-sm mb-4"> 
+            {erro} 
+          </p>
+        )}
+
         <button
-          onClick={handleLogin}
+          onClick={handleLogin} // Chama a função de login ao clicar
           className="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition"
         >
           Entrar
