@@ -15,6 +15,16 @@ function Login() {
       return
     }
 
+    if(!email.includes("@")){
+      setErro("Digite um e-mail válido!")
+      return
+    }
+
+    if(senha.length < 6){
+      setErro("A senha deve ter pelo menos 6 caracteres.")
+      return
+    }
+
     setErro("")
 
     console.log("E-mail:", email)
