@@ -1,7 +1,6 @@
 CREATE DATABASE quiz_ds_db
 USE quiz_ds_db;
 
-
 CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
