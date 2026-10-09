@@ -4,10 +4,10 @@ import { pool } from "../config/db.js";
 
 export async function cadastrar(req, res) {
     try {
-        const { usuario, senha } = req.body;
+        const { usuario, senha, nome, email} = req.body;
 
-        if (!usuario || !senha) {
-            return res.status(400).json({ mensagem: "Usuário e senha são obrigatório"});
+        if (!usuario || !senha || !nome || !email) {
+            return res.status(400).json({ mensagem: "Todos os campos são obrigatorios"});
         }
 
         if (senha.length < 4) {
@@ -26,8 +26,8 @@ export async function cadastrar(req, res) {
         const senhaHash = await bcrypt.hash(senha, 10);
         
         const [resultado] = await pool.query(
-            "INSERT INTO usuarios (usuario, senha) VALUES (?, ?)",
-            [usuario, senhaHash]
+            "INSERT INTO usuarios (usuario, senha, nome, email) VALUES (?, ?)",
+            [usuario, senhaHash, nome, email]
         );
 
         return res.status(201).json({
@@ -43,28 +43,32 @@ export async function cadastrar(req, res) {
 
 export async function login(req, res) {
     try {
-        const { usuario, senha } = req.body;
+        const { usuario, senha, email } = req.body;
 
-        if (!usuario || !senha) {
-            return res.status(400).json({ mensagem: "Usuário e senha são obrigatórios" });
+        if (!usuario || !senha || !email) {
+            return res.status(400).json({ mensagem: "Usuario, Senha e Email são obrigatorios." });
         }
 
         const [usuarios] = await pool.query(
-            "SELECT id, usuario, senha FROM usuarios WHERE usuario = ? LIMIT 1",
+            "SELECT id, usuario, senha, email FROM usuarios WHERE usuario = ? LIMIT 1",
             [usuario]
         );
 
         if (usuarios.length === 0) {
-            return res.status(401).json({ mensagem: "Usuário ou senha inválidos."});
+            return res.status(401).json({ mensagem: "Informaçoes estao inválidas."});
         }
 
         const encontrado = usuarios[0];
         const senhaValida = await bcrypt.compare(senha, encontrado.senha);
+        const emailValido = await bcrypt.compare(email, encontrado.email);
 
         if (!senhaValida) {
             return res.status(401).json({ mensagem: "Usuário ou senha inválidos"});
         }
 
+        if (!email) {
+            return res.status(401).json({ mensagem: "Email inválido"});
+        }
         const token = jwt.sign(
             { id: encontrado.id, usuario: encontrado.usuario},
             process.env.JWT_SECRET,
