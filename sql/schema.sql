@@ -64,28 +64,14 @@ CREATE TABLE questao (
 );
 
 CREATE TABLE alternativa (
-
     id INT AUTO_INCREMENT PRIMARY KEY,
     questao_id INT NOT NULL,
     texto_alternativa TEXT NOT NULL,
     is_correta BOOLEAN NOT NULL,
 
-    questao_correta_id INT
-        GENERATED ALWAYS AS (
-            CASE
-                WHEN is_correta = TRUE THEN questao_id
-                ELSE NULL
-            END
-        ) STORED,
-
     CHECK (is_correta IN (0, 1)),
-
     UNIQUE (id, questao_id),
-
-    UNIQUE (questao_correta_id),
-
     FOREIGN KEY (questao_id) REFERENCES questao(id)
-
 );
 
 CREATE TABLE tentativa (
