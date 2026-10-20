@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #130421;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  background-image: url('./assets/Rectangle.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.subject-card-container {
+  border-radius: 60px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 
+              inset 0 1px 1px rgba(196, 173, 223, 0.2);
+}
+
+@media (max-width: 640px) {
+  .subject-card-container {
+    border-radius: 40px;
+  }
+}
+
+.highlight-underline {
+  position: relative;
+  display: inline-block;
+  color: #FF5000;
+}
+
+.highlight-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #FF5000;
+  border-radius: 2px;
+}
