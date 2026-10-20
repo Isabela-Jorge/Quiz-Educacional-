@@ -1,9 +1,18 @@
 @import "tailwindcss";
 
+/* Variáveis globais de cores */
+:root {
+  --color-brand-bg: #130421;
+  --color-brand-header: #1b0a30;
+  --color-brand-card: #270845;
+  --color-brand-orange: #FF5000;
+  --color-brand-purple-light: #C4ADDF;
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #130421;
+  background-color: var(--color-brand-bg);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
@@ -32,7 +41,7 @@ body {
 .highlight-underline {
   position: relative;
   display: inline-block;
-  color: #FF5000;
+  color: var(--color-brand-orange);
 }
 
 .highlight-underline::after {
@@ -42,6 +51,6 @@ body {
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: #FF5000;
+  background-color: var(--color-brand-orange);
   border-radius: 2px;
 }
