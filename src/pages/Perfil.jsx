@@ -1,5 +1,25 @@
 
-import { useRef, useState } from "react";
+import { useState } from "react";
+
+import avatar1 from "../assets/avatares/avatar1.png";
+import avatar2 from "../assets/avatares/avatar2.png";
+import avatar3 from "../assets/avatares/avatar3.png";
+import avatar4 from "../assets/avatares/avatar4.png";
+import avatar5 from "../assets/avatares/avatar5.png";
+import avatar6 from "../assets/avatares/avatar6.png";
+import avatar7 from "../assets/avatares/avatar7.png";
+import avatar8 from "../assets/avatares/avatar8.png";
+
+const avatares = [
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  avatar5,
+  avatar6,
+  avatar7,
+  avatar8,
+];
 
 function Perfil({
   nome = "Aluno Teste",
@@ -11,47 +31,8 @@ function Perfil({
   const [novoUsuario, setNovoUsuario] = useState(usuarioInicial);
   const [editandoUsuario, setEditandoUsuario] = useState(false);
   const [erroUsuario, setErroUsuario] = useState("");
-  const [foto, setFoto] = useState("");
-  const [erroFoto, setErroFoto] = useState("");
-
-  const inputFotoRef = useRef(null);
-
-  // Selecionar foto de perfil
-  const handleFoto = (e) => {
-    const arquivo = e.target.files?.[0];
-
-    if (!arquivo) return;
-
-    setErroFoto("");
-
-    if (!arquivo.type.startsWith("image/")) {
-      setErroFoto("Selecione um arquivo de imagem válido.");
-      e.target.value = "";
-      return;
-    }
-
-    // Limite de 5 MB
-    if (arquivo.size > 5 * 1024 * 1024) {
-      setErroFoto("A imagem deve ter no máximo 5 MB.");
-      e.target.value = "";
-      return;
-    }
-
-    const leitor = new FileReader();
-
-    leitor.onload = () => {
-      if (typeof leitor.result === "string") {
-        setFoto(leitor.result);
-      }
-    };
-
-    leitor.onerror = () => {
-      setErroFoto("Não foi possível carregar a imagem.");
-    };
-
-    leitor.readAsDataURL(arquivo);
-    e.target.value = "";
-  };
+  const [foto, setFoto] = useState(avatar1);
+const [mostrarAvatares, setMostrarAvatares] = useState(false);
 
   // Salvar alteração do nome de usuário
   const handleSalvarUsuario = (e) => {
