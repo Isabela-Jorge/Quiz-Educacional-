@@ -43,3 +43,19 @@ CT-XX – Nome de usuario contendo emojis
 - Objetivo: verificar o comportamento do sistema ao inserir emojis no campo de nome de usuario.
 - Entrada: inserir um nome de usuario contendo um ou mais emojis.
 - Resultado esperado: o sistema deve rejeitar emojis de acordo com a regra definida nos requisitos.
+
+-------------------------------------
+
+CT-XX – Campo de "Nome Completo" contendo numeros
+
+- Objetivo: verificar o comportamento do sistema ao inserir numeros no campo de "nome completo".
+- Entrada: inserir um nome completo contendo um ou mais numeros
+- Resultado esperado: o sistema deve rejeitar numeros de acordo com a regra definida nos requisitos.
+
+-------------------------------------
+
+CT-XX – Campo de "Nome Completo" contendo emojis
+
+- Objetivo: verificar o comportamento do sistema ao inserir emojis no campo de "nome completo".
+- Entrada: inserir um nome completo contendo um ou mais emojis
+- Resultado esperado: o sistema deve rejeitar emojis de acordo com a regra definida nos requisitos.
