@@ -27,3 +27,13 @@ CT-XX – E-mail em formato inválido
 - Objetivo: verificar se o sistema rejeita endereços de e-mail que não possuem um formato válido.
 - Entrada: "@G" e "a@g"
 - Resultado esperado: o sistema deve informar que o e-mail é inválido e impedir o envio do formulário.
+
+-------------------------------------
+
+CT-XX – Cadastro sem nome de usuário
+
+- Objetivo: verificar se o sistema impede o cadastro quando o campo de nome de usuário está vazio.
+- Entrada: preencher os demais campos obrigatórios com dados válidos e deixar o campo de nome de usuário vazio.
+- Resultado esperado: o sistema deve impedir o cadastro e informar que o campo de nome de usuário é obrigatório.
+
+--------------------------------------------
