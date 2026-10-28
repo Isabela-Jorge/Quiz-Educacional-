@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import avatar1 from "../assets/avatares/avatar1.png";
 import avatar2 from "../assets/avatares/avatar2.png";
@@ -10,29 +10,38 @@ import avatar6 from "../assets/avatares/avatar6.png";
 import avatar7 from "../assets/avatares/avatar7.png";
 import avatar8 from "../assets/avatares/avatar8.png";
 
-const avatares = [
-  avatar1,
-  avatar2,
-  avatar3,
-  avatar4,
-  avatar5,
-  avatar6,
-  avatar7,
-  avatar8,
-];
-
 function Perfil({
   nome = "Aluno Teste",
   usuarioInicial = "aluno123",
   onVoltar = () => {},
   onLogout = () => {},
 }) {
+  const avatares = [
+    avatar1,
+    avatar2,
+    avatar3,
+    avatar4,
+    avatar5,
+    avatar6,
+    avatar7,
+    avatar8,
+  ];
+
   const [usuario, setUsuario] = useState(usuarioInicial);
   const [novoUsuario, setNovoUsuario] = useState(usuarioInicial);
   const [editandoUsuario, setEditandoUsuario] = useState(false);
   const [erroUsuario, setErroUsuario] = useState("");
-  const [foto, setFoto] = useState(avatar1);
-const [mostrarAvatares, setMostrarAvatares] = useState(false);
+
+  const carrosselRef = useRef(null);
+
+  const [foto, setFoto] = useState(
+    () => localStorage.getItem("avatarPerfil") || avatar1
+  );
+
+  const handleFoto = (avatar) => {
+    setFoto(avatar);
+    localStorage.setItem("avatarPerfil", avatar);
+  };
 
   // Salvar alteração do nome de usuário
   const handleSalvarUsuario = (e) => {
@@ -102,67 +111,93 @@ const [mostrarAvatares, setMostrarAvatares] = useState(false);
             px-5 py-8 text-center text-[var(--color-off-white)] sm:py-10">
 
             {/* Foto de perfil */}
-            <div className="relative mx-auto mb-4 h-28 w-28">
-              <div
-                className="flex h-28 w-28 items-center justify-center
-                  overflow-hidden rounded-full border-4
-                  border-[var(--color-off-white)]
-                  bg-[var(--color-light-purple)]"
-              >
-                {foto ? (
-                  <img
-                    src={foto}
-                    alt={`Foto de perfil de ${nome}`}
-                    className="h-full w-full object-cover"
-                  />
-                ) : (
-                  <span
-                    className="text-[42px] font-bold
-                      text-[var(--color-dark-purple)]"
-                    aria-hidden="true"
-                  >
-                    {nome.trim().charAt(0).toUpperCase() || "A"}
-                  </span>
-                )}
-              </div>
+<div className="mx-auto mb-6">
+  <div
+    className="mx-auto mb-4 flex h-28 w-28 items-center
+      justify-center overflow-hidden rounded-full border-4
+      border-[var(--color-off-white)]
+      bg-[var(--color-light-purple)]"
+  >
+    <img
+      src={foto}
+      alt={`Avatar de perfil de ${nome}`}
+      className="h-full w-full object-cover"
+    />
+  </div>
 
-              <button
-                type="button"
-                onClick={() => inputFotoRef.current?.click()}
-                aria-label="Escolher foto de perfil"
-                title="Trocar foto"
-                className="absolute bottom-0 right-0 flex h-9 w-9
-                  items-center justify-center rounded-full
-                  border-2 border-[var(--color-off-white)]
-                  bg-[var(--color-digital-orange)]
-                  text-[18px] text-[var(--color-off-white)]
-                  transition duration-200 hover:scale-105
-                  focus-visible:outline-none focus-visible:ring-2
-                  focus-visible:ring-white"
-              >
-                ✎
-              </button>
+  <p className="mb-4 text-center text-[13px]
+    text-[var(--color-light-purple)]">
+    Escolha sua foto de perfil
+  </p>
 
-              <input
-                ref={inputFotoRef}
-                type="file"
-                accept="image/*"
-                onChange={handleFoto}
-                className="hidden"
-                aria-label="Selecionar imagem do dispositivo"
-              />
-            </div>
+  {/* Carrossel de avatares */}
+<div className="mt-4">
+  <div className="flex items-center gap-2">
 
-            <p className="mb-2 text-[13px]
-              text-[var(--color-light-purple)]">
-              Clique no ícone para trocar sua foto
-            </p>
+    {/* Seta para a esquerda */}
+    <button
+      type="button"
+      onClick={() => {
+        carrosselRef.current?.scrollBy({
+          left: -160,
+          behavior: "smooth",
+        });
+      }}
+      aria-label="Avatares anteriores"
+      className="shrink-0 rounded-full bg-white/20
+        px-3 py-2 text-xl text-white hover:bg-white/30"
+    >
+      ‹
+    </button>
 
-            {erroFoto && (
-              <p role="alert" className="mb-3 text-[13px] text-red-200">
-                {erroFoto}
-              </p>
-            )}
+    {/* Fotos dos avatares */}
+    <div
+      ref={carrosselRef}
+      className="flex flex-1 gap-3 overflow-x-auto
+        scroll-smooth px-1 py-3"
+    >
+      {avatares.map((avatar, index) => (
+        <button
+          key={index}
+          type="button"
+          onClick={() => handleFoto(avatar)}
+          aria-label={`Selecionar avatar ${index + 1}`}
+          aria-pressed={foto === avatar}
+          className={`shrink-0 rounded-full border-4 p-1
+            transition hover:scale-105 ${
+              foto === avatar
+                ? "border-[var(--color-digital-orange)]"
+                : "border-transparent"
+            }`}
+        >
+          <img
+            src={avatar}
+            alt={`Avatar ${index + 1}`}
+            className="h-14 w-14 rounded-full object-cover"
+          />
+        </button>
+      ))}
+    </div>
+
+    {/* Seta para a direita */}
+    <button
+      type="button"
+      onClick={() => {
+        carrosselRef.current?.scrollBy({
+          left: 160,
+          behavior: "smooth",
+        });
+      }}
+      aria-label="Próximos avatares"
+      className="shrink-0 rounded-full bg-white/20
+        px-3 py-2 text-xl text-white hover:bg-white/30"
+    >
+      ›
+    </button>
+
+  </div>
+</div>
+</div>
 
             <h2 id="perfil-titulo"
               className="break-words text-[26px] font-bold sm:text-[30px]">
@@ -338,7 +373,7 @@ const [mostrarAvatares, setMostrarAvatares] = useState(false);
             className="min-h-[42px] rounded-[7px] border-2
               border-[var(--color-dark-purple)]
               bg-transparent px-6 py-3 text-[13px] font-bold uppercase
-              text-[var(--color-dark-purple)]
+        \      text-[var(--color-dark-purple)]
               transition duration-200 hover:bg-[var(--color-off-white)]
               focus-visible:outline-none focus-visible:ring-2
               focus-visible:ring-[var(--color-dark-purple)]"
