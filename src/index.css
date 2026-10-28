@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+/* Variáveis globais de cores */
+:root {
+  --color-brand-bg: #130421;
+  --color-brand-header: #1b0a30;
+  --color-brand-card: #270845;
+  --color-brand-orange: #FF5000;
+  --color-brand-purple-light: #C4ADDF;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-brand-bg);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  background-image: url('./assets/Rectangle.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.subject-card-container {
+  border-radius: 60px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 
+              inset 0 1px 1px rgba(196, 173, 223, 0.2);
+}
+
+@media (max-width: 640px) {
+  .subject-card-container {
+    border-radius: 40px;
+  }
+}
+
+.highlight-underline {
+  position: relative;
+  display: inline-block;
+  color: var(--color-brand-orange);
+}
+
+.highlight-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-brand-orange);
+  border-radius: 2px;
+}
