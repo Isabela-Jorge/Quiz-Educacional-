@@ -1,5 +1,5 @@
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import avatar1 from "../assets/avatares/avatar1.png";
 import avatar2 from "../assets/avatares/avatar2.png";
@@ -32,7 +32,6 @@ function Perfil({
   const [editandoUsuario, setEditandoUsuario] = useState(false);
   const [erroUsuario, setErroUsuario] = useState("");
 
-  const carrosselRef = useRef(null);
 
   const [foto, setFoto] = useState(
     () => localStorage.getItem("avatarPerfil") || avatar1
@@ -42,6 +41,15 @@ function Perfil({
     setFoto(avatar);
     localStorage.setItem("avatarPerfil", avatar);
   };
+
+  const indiceAtivo = Math.max(0, avatares.indexOf(foto));
+
+const irParaAvatar = (indice) => {
+  const novoIndice =
+    (indice + avatares.length) % avatares.length;
+
+  handleFoto(avatares[novoIndice]);
+};
 
   // Salvar alteração do nome de usuário
   const handleSalvarUsuario = (e) => {
@@ -130,73 +138,100 @@ function Perfil({
     Escolha sua foto de perfil
   </p>
 
-  {/* Carrossel de avatares */}
-<div className="mt-4">
-  <div className="flex items-center gap-2">
 
-    {/* Seta para a esquerda */}
+{/* Carrossel de avatares */}
+<div className="mt-6">
+
+  <div className="relative flex items-center justify-center gap-2 sm:gap-5">
+
+    {/* Seta esquerda */}
     <button
       type="button"
-      onClick={() => {
-        carrosselRef.current?.scrollBy({
-          left: -160,
-          behavior: "smooth",
-        });
-      }}
-      aria-label="Avatares anteriores"
-      className="shrink-0 rounded-full bg-white/20
-        px-3 py-2 text-xl text-white hover:bg-white/30"
+      onClick={() => irParaAvatar(indiceAtivo - 1)}
+      aria-label="Foto anterior"
+      className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-2xl font-bold text-[var(--color-dark-purple)] shadow-md transition hover:scale-110"
     >
       ‹
     </button>
 
-    {/* Fotos dos avatares */}
-    <div
-      ref={carrosselRef}
-      className="flex flex-1 gap-3 overflow-x-auto
-        scroll-smooth px-1 py-3"
-    >
-      {avatares.map((avatar, index) => (
-        <button
-          key={index}
-          type="button"
-          onClick={() => handleFoto(avatar)}
-          aria-label={`Selecionar avatar ${index + 1}`}
-          aria-pressed={foto === avatar}
-          className={`shrink-0 rounded-full border-4 p-1
-            transition hover:scale-105 ${
-              foto === avatar
-                ? "border-[var(--color-digital-orange)]"
-                : "border-transparent"
-            }`}
-        >
-          <img
-            src={avatar}
-            alt={`Avatar ${index + 1}`}
-            className="h-14 w-14 rounded-full object-cover"
-          />
-        </button>
-      ))}
+    {/* Fotos */}
+    <div className="flex min-w-0 flex-1 items-center justify-center gap-2 sm:gap-4">
+
+      {[-1, 0, 1].map((deslocamento) => {
+        const indice =
+          (indiceAtivo + deslocamento + avatares.length) %
+          avatares.length;
+
+        const central = deslocamento === 0;
+
+        return (
+          <button
+            key={indice}
+            type="button"
+            onClick={() =>
+              irParaAvatar(indiceAtivo + deslocamento)
+            }
+            aria-label={`Selecionar avatar ${indice + 1}`}
+            aria-pressed={foto === avatares[indice]}
+            className={`
+              shrink-0 overflow-hidden rounded-2xl border-4
+              transition-all duration-300
+              ${
+                central
+                  ? "h-44 w-36 border-[var(--color-digital-orange)] sm:h-56 sm:w-48"
+                  : "h-28 w-20 border-transparent opacity-60 sm:h-40 sm:w-32"
+              }
+            `}
+          >
+            <img
+              src={avatares[indice]}
+              alt={`Avatar ${indice + 1}`}
+              className="h-full w-full object-cover"
+            />
+          </button>
+        );
+      })}
+
     </div>
 
-    {/* Seta para a direita */}
+    </div>
+    
+
+    {/* Seta direita */}
     <button
       type="button"
-      onClick={() => {
-        carrosselRef.current?.scrollBy({
-          left: 160,
-          behavior: "smooth",
-        });
-      }}
-      aria-label="Próximos avatares"
-      className="shrink-0 rounded-full bg-white/20
-        px-3 py-2 text-xl text-white hover:bg-white/30"
+      onClick={() => irParaAvatar(indiceAtivo + 1)}
+      aria-label="Próxima foto"
+      className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-2xl font-bold text-[var(--color-dark-purple)] shadow-md transition hover:scale-110"
     >
       ›
     </button>
 
   </div>
-</div>
+
+  {/* Indicadores */}
+  <div className="mt-5 flex justify-center gap-2">
+
+    {avatares.map((avatar, index) => (
+      <button
+        key={index}
+        type="button"
+        onClick={() => irParaAvatar(index)}
+        aria-label={`Ir para foto ${index + 1}`}
+        aria-pressed={indiceAtivo === index}
+        className={`
+          h-3 w-3 rounded-full transition-all
+          ${
+            indiceAtivo === index
+              ? "scale-125 bg-[var(--color-digital-orange)]"
+              : "bg-white/50 hover:bg-white"
+          }
+        `}
+      />
+    ))}
+
+  </div>
+
 </div>
 
             <h2 id="perfil-titulo"
