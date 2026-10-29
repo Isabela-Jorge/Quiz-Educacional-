@@ -59,3 +59,11 @@ CT-XX – Campo de "Nome Completo" contendo emojis
 - Objetivo: verificar o comportamento do sistema ao inserir emojis no campo de "nome completo".
 - Entrada: inserir um nome completo contendo um ou mais emojis
 - Resultado esperado: o sistema deve rejeitar emojis de acordo com a regra definida nos requisitos.
+
+-------------------------------------
+
+CT-XX – Campo de "Nome Completo" contendo emojis
+
+- Objetivo: verificar o comportamento do sistema ao criar um perfil sem nome de usuário.
+- Entrada: Tentar criar um perfil sem completar o campo de "Nome de usuário"
+- Resultado esperado: o sistema deve rejeitar a criação de um perfil sem todas as informações.
