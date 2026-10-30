@@ -1,53 +1,81 @@
--- =====================================================
+-- ============================================================
 -- RANKING GERAL
--- Soma a maior pontuacao de cada aluno em cada quiz.
--- =====================================================
+-- Considera somente o último quiz finalizado de cada aluno.
+-- RN14: alunos com a mesma pontuação ocupam a mesma posição.
+-- ============================================================
 
-WITH maiores_pontuacoes AS (
+WITH ultimas_tentativas AS (
     SELECT
         usuario_id,
         quiz_id,
-        MAX(pontuacao_total) AS maior_pontuacao
+        pontuacao_total,
+        ROW_NUMBER() OVER (
+            PARTITION BY usuario_id, quiz_id
+            ORDER BY data_hora_fim DESC, id DESC
+        ) AS numero
     FROM tentativa
     WHERE status = 'FINALIZADA'
-    GROUP BY usuario_id, quiz_id
+),
+pontuacoes_por_quiz AS (
+    SELECT
+        usuario_id,
+        quiz_id,
+        pontuacao_total
+    FROM ultimas_tentativas
+    WHERE numero = 1
+),
+soma_ranking AS (
+    SELECT
+        u.id AS aluno_id,
+        u.nome AS aluno,
+        SUM(p.pontuacao_total) AS pontuacao_geral,
+        RANK() OVER (
+            ORDER BY SUM(p.pontuacao_total) DESC
+        ) AS posicao
+    FROM pontuacoes_por_quiz p
+    INNER JOIN usuario u ON u.id = p.usuario_id
+    WHERE u.tipo = 'ALUNO'
+    GROUP BY u.id, u.nome
 )
 SELECT
-    u.id AS aluno_id,
-    u.nome AS aluno,
-    SUM(mp.maior_pontuacao) AS pontuacao_geral
-FROM maiores_pontuacoes mp
-INNER JOIN usuario u
-    ON u.id = mp.usuario_id
-WHERE u.tipo = 'ALUNO'
-GROUP BY u.id, u.nome
-ORDER BY pontuacao_geral DESC, u.nome ASC;
+    posicao,
+    aluno_id,
+    aluno,
+    pontuacao_geral
+FROM soma_ranking
+ORDER BY posicao, aluno;
 
 
 -- =====================================================
 -- RANKING POR QUIZ
--- Mostra a maior pontuacao de cada aluno em cada quiz.
+-- Mostra a pontuação do último quiz finalizado de cada aluno, com ranking.
 -- =====================================================
 
+WITH ultimas_tentativas AS (
+    SELECT
+        usuario_id,
+        quiz_id,
+        pontuacao_total,
+        ROW_NUMBER() OVER (
+            PARTITION BY usuario_id, quiz_id
+            ORDER BY data_hora_fim DESC, id DESC
+        ) AS numero
+    FROM tentativa
+    WHERE status = 'FINALIZADA'
+)
 SELECT
     q.id AS quiz_id,
     q.titulo AS quiz,
     u.id AS aluno_id,
     u.nome AS aluno,
-    MAX(t.pontuacao_total) AS maior_pontuacao
-FROM tentativa t
-INNER JOIN usuario u
-    ON u.id = t.usuario_id
-INNER JOIN quiz q
-    ON q.id = t.quiz_id
-WHERE t.status = 'FINALIZADA'
+    t.pontuacao_total,
+    RANK() OVER (
+        PARTITION BY q.id
+        ORDER BY t.pontuacao_total DESC
+    ) AS posicao
+FROM ultimas_tentativas t
+INNER JOIN usuario u ON u.id = t.usuario_id
+INNER JOIN quiz q ON q.id = t.quiz_id
+WHERE t.numero = 1
   AND u.tipo = 'ALUNO'
-GROUP BY
-    q.id,
-    q.titulo,
-    u.id,
-    u.nome
-ORDER BY
-    q.id,
-    maior_pontuacao DESC,
-    u.nome ASC;
+ORDER BY q.id, posicao, u.nome;
