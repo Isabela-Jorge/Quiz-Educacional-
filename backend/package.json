@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch src/server.js",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand",
     "start": "node src/server.js"
   },
   "dependencies": {
@@ -14,5 +15,9 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.14.5",
     "server": "^1.0.42"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2",
+    "supertest": "^7.3.1"
   }
 }
