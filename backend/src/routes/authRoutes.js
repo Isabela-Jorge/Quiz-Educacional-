@@ -4,7 +4,8 @@ import {
     cadastrar,
     login,
     me,
-    listarUsuarios
+    listarUsuarios,
+    logout
 } from "../controllers/authController.js";
 import { autenticar } from "../middlewares/authMiddleware.js";
 

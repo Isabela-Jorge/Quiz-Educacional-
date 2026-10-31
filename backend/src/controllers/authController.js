@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { pool } from "../config/db.js";
+import { revogarToken } from "../ultilis/tokensRevogados.js";
 
 export async function cadastrar(req, res) {
     try {
@@ -153,3 +154,16 @@ export async function listarUsuarios(req, res) {
         return res.status(500).json({ mensagem: "Erro ao listar usuários" });
     }
 }
+
+export function logout(req, res) {
+    const authHeader = req.headers.authorization;
+    const token = authHeader.split(" ")[1];
+
+    const expiracao = req.usuario.exp * 1000;
+
+    revogarToken(token, expiracao);
+
+    return res.json({
+        mensagem: "Logout realizado com sucesso"
+    });
+} 
