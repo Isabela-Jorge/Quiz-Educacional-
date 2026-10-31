@@ -1,31 +1,34 @@
 import jwt from "jsonwebtoken";
-import { tokenRevogado } from "../utils/tokensRevogados.js";
+import { tokenRevogado } from "../utilities/tokensRevogados.js";
 
 export function autenticar(req, res, next) {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader?.startsWith("Bearer ")) {
+    const partes = authHeader?.match(/^Bearer\s+(\S+)$/);
+
+    if (!partes) {
         return res.status(401).json({
             mensagem: "Token não informado"
         });
     }
 
-    const token = authHeader.split(" ")[1];
+    const token = partes[1];
+    let payload;
 
     try {
-        const payload = jwt.verify(token, process.env.JWT_SECRET);
-
-        if (tokenRevogado(token)) {
-            return res.status(401).json({
-                mensagem: "Token revogado. Faça login novamente."
-            });
-        }
-
-        req.usuario = payload;
-        next();
+        payload = jwt.verify(token, process.env.JWT_SECRET);
     } catch {
         return res.status(401).json({
             mensagem: "Token inválido ou expirado"
         });
     }
+
+    if (tokenRevogado(token)) {
+        return res.status(401).json({
+            mensagem: "Token revogado. Faça login novamente."
+        });
+    }
+
+    req.usuario = payload;
+    return next();
 }
