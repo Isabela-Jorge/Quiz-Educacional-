@@ -28,7 +28,7 @@
 
 -- ============================================================
 -- PROJETO: Quiz Integrador
--- DISCIPLINA: Desenvolvimento de Sistemas I - 3º Módulo
+-- DISCIPLINA: Desenvolvimento de Sistemas I - 2º Módulo
 -- DIFICULDADE: DIFÍCIL
 -- TOTAL: 20 questões
 -- PONTUAÇÃO: 15 pontos por questão
