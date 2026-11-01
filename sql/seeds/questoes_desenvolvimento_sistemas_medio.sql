@@ -1,7 +1,38 @@
 -- ============================================================
+-- ATENÇÃO: IDENTIFICADORES DAS QUESTÕES
+-- ============================================================
+-- Os IDs utilizados neste script correspondem ao banco
+-- de dados original do projeto.
+--
+-- Como a tabela questao utiliza AUTO_INCREMENT, os IDs
+-- podem ser diferentes em outros bancos de dados.
+--
+-- ORIENTAÇÕES PARA EXECUÇÃO:
+-- 1. Execute primeiro o INSERT das questões.
+-- 2. Consulte os IDs gerados:
+--
+--    SELECT id, enunciado
+--    FROM questao
+--    WHERE quiz_id = @quiz_ds2_id
+--    ORDER BY id;
+--
+-- 3. Confira os IDs das questões cadastradas.
+-- 4. Se necessário, atualize os IDs no INSERT das
+--    alternativas antes de executá-lo.
+-- 5. Execute o INSERT das alternativas.
+--
+-- IMPORTANTE:
+-- Não execute novamente os INSERTs caso os registros
+-- já estejam cadastrados, para evitar duplicações.
+-- ============================================================
+
+-- ============================================================
 -- PROJETO: Quiz Integrador
 -- DISCIPLINA: Desenvolvimento de Sistemas II - 3º Módulo
--- TOTAL: 20 Questões Médias (10 pts, 15 seg)
+-- DIFICULDADE: MÉDIO
+-- TOTAL: 20 questões
+-- PONTUAÇÃO: 10 pontos por questão
+-- TEMPO: 15 segundos por questão
 -- ============================================================
 
 USE quiz_ds_db;
@@ -17,226 +48,172 @@ SET @quiz_ds2_id = (
 );
 
 -- ============================================================
--- Inserção das Questões Médias (Evitando duplicações)
+-- DS II | Questões 21 a 40 | Nível médio
+-- 10 pontos | 15 segundos
 -- ============================================================
 
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Em uma API com criação de pedidos, como evitar pedidos duplicados após tentativas repetidas de POST?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Em uma API com criação de pedidos, como evitar pedidos duplicados após tentativas repetidas de POST?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Uma transferência entre contas precisa ser integral ou não ocorrer. Qual propriedade ACID atende a isso?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Uma transferência entre contas precisa ser integral ou não ocorrer. Qual propriedade ACID atende a isso?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Duas transações atualizam o mesmo saldo simultaneamente. Qual recurso ajuda a evitar atualização perdida?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Duas transações atualizam o mesmo saldo simultaneamente. Qual recurso ajuda a evitar atualização perdida?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual abordagem reduz o problema N+1 consultas ao carregar pedidos e seus itens?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual abordagem reduz o problema N+1 consultas ao carregar pedidos e seus itens?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Em uma API pública, qual mecanismo limita o número de requisições por cliente em uma janela?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Em uma API pública, qual mecanismo limita o número de requisições por cliente em uma janela?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Uma rota recebe o ID do usuário no corpo da requisição. Como evitar acesso indevido a dados de outro usuário?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Uma rota recebe o ID do usuário no corpo da requisição. Como evitar acesso indevido a dados de outro usuário?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual resposta é mais adequada para uma atualização condicional com ETag incompatível e If-Match?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual resposta é mais adequada para uma atualização condicional com ETag incompatível e If-Match?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Uma API precisa manter compatibilidade ao adicionar um campo opcional em JSON. Qual medida é mais adequada?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Uma API precisa manter compatibilidade ao adicionar um campo opcional em JSON. Qual medida é mais adequada?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Em um endpoint de listagem com muitos registros, qual paginação tende a ser mais estável diante de inserções frequentes?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Em um endpoint de listagem com muitos registros, qual paginação tende a ser mais estável diante de inserções frequentes?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Um serviço grava um pedido e precisa publicar um evento de forma confiável. Qual padrão reduz inconsistências entre gravação e publicação?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Um serviço grava um pedido e precisa publicar um evento de forma confiável. Qual padrão reduz inconsistências entre gravação e publicação?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Uma API recebe requisições repetidas de pagamento após timeout. Qual comportamento é mais seguro?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Uma API recebe requisições repetidas de pagamento após timeout. Qual comportamento é mais seguro?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual medida reduz o risco de exposição de dados sensíveis em logs de API?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual medida reduz o risco de exposição de dados sensíveis em logs de API?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Como evitar que uma API retorne dados de um pedido pertencente a outro cliente?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Como evitar que uma API retorne dados de um pedido pertencente a outro cliente?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Em uma transação, qual propriedade ACID assegura que dados confirmados sobrevivam a falhas conforme as garantias do SGBD?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Em uma transação, qual propriedade ACID assegura que dados confirmados sobrevivam a falhas conforme as garantias do SGBD?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Em uma API, quando o servidor aceita uma tarefa assíncrona ainda não concluída, qual código é adequado?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Em uma API, quando o servidor aceita uma tarefa assíncrona ainda não concluída, qual código é adequado?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual estratégia melhora a confiabilidade de chamadas a um serviço externo instável sem provocar sobrecarga contínua?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual estratégia melhora a confiabilidade de chamadas a um serviço externo instável sem provocar sobrecarga contínua?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual é a principal finalidade de um índice composto em colunas frequentemente filtradas em conjunto?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual é a principal finalidade de um índice composto em colunas frequentemente filtradas em conjunto?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Uma API permite alterar o campo papel do usuário. Qual controle é essencial?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Uma API permite alterar o campo papel do usuário. Qual controle é essencial?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Em uma arquitetura com múltiplas instâncias de API, onde guardar sessões compartilhadas quando necessário?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Em uma arquitetura com múltiplas instâncias de API, onde guardar sessões compartilhadas quando necessário?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual técnica ajuda a detectar alterações incompatíveis no contrato de uma API antes da publicação?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual técnica ajuda a detectar alterações incompatíveis no contrato de uma API antes da publicação?');
-
+INSERT INTO questao (
+    quiz_id,
+    enunciado,
+    dificuldade,
+    pontos,
+    tempo_limite_segundos
+)
+VALUES
+(@quiz_ds2_id, 'Em uma API com criação de pedidos, como evitar pedidos duplicados após tentativas repetidas de POST?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Uma transferência entre contas precisa ser integral ou não ocorrer. Qual propriedade ACID atende a isso?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Duas transações atualizam o mesmo saldo simultaneamente. Qual recurso ajuda a evitar atualização perdida?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual abordagem reduz o problema N+1 consultas ao carregar pedidos e seus itens?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Em uma API pública, qual mecanismo limita o número de requisições por cliente em uma janela?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Uma rota recebe o ID do usuário no corpo da requisição. Como evitar acesso indevido a dados de outro usuário?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual resposta é mais adequada para uma atualização condicional com ETag incompatível e If-Match?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Uma API precisa manter compatibilidade ao adicionar um campo opcional em JSON. Qual medida é mais adequada?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Em um endpoint de listagem com muitos registros, qual paginação tende a ser mais estável diante de inserções frequentes?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Um serviço grava um pedido e precisa publicar um evento de forma confiável. Qual padrão reduz inconsistências entre gravação e publicação?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Uma API recebe requisições repetidas de pagamento após timeout. Qual comportamento é mais seguro?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual medida reduz o risco de exposição de dados sensíveis em logs de API?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Como evitar que uma API retorne dados de um pedido pertencente a outro cliente?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Em uma transação, qual propriedade ACID assegura que dados confirmados sobrevivam a falhas conforme as garantias do SGBD?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Em uma API, quando o servidor aceita uma tarefa assíncrona ainda não concluída, qual código é adequado?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual estratégia melhora a confiabilidade de chamadas a um serviço externo instável sem provocar sobrecarga contínua?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual é a principal finalidade de um índice composto em colunas frequentemente filtradas em conjunto?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Uma API permite alterar o campo papel do usuário. Qual controle é essencial?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Em uma arquitetura com múltiplas instâncias de API, onde guardar sessões compartilhadas quando necessário?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual técnica ajuda a detectar alterações incompatíveis no contrato de uma API antes da publicação?', 'MEDIO', 10, 15);
 
 -- ============================================================
--- INSERÇÃO DAS ALTERNATIVAS USANDO O ENUNCIADO COMO REFERÊNCIA
+-- DS II | Alternativas das questões 21 a 40
+-- (Nota: Ajuste os IDs da coluna questao_id conforme a sua base local gerada)
 -- ============================================================
 
-INSERT INTO alternativa (questao_id, texto_alternativa, is_correta)
-SELECT q.id, t.texto, t.correta
-FROM questao q
-JOIN (
-    -- Q41
-    SELECT 'Em uma API com criação de pedidos, como evitar pedidos duplicados após tentativas repetidas de POST?' AS enun, 'Criar um novo pedido a cada repetição.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Em uma API com criação de pedidos, como evitar pedidos duplicados após tentativas repetidas de POST?', 'Adotar uma chave de idempotência persistida e associada ao resultado.', TRUE UNION ALL
-    SELECT 'Em uma API com criação de pedidos, como evitar pedidos duplicados após tentativas repetidas de POST?', 'Trocar POST por GET sem alterar a semântica.', FALSE UNION ALL
-    SELECT 'Em uma API com criação de pedidos, como evitar pedidos duplicados após tentativas repetidas de POST?', 'Desabilitar toda validação de entrada.', FALSE UNION ALL
-    
-    -- Q42
-    SELECT 'Uma transferência entre contas precisa ser integral ou não ocorrer. Qual propriedade ACID atende a isso?', 'Atomicidade.', TRUE UNION ALL
-    SELECT 'Uma transferência entre contas precisa ser integral ou não ocorrer. Qual propriedade ACID atende a isso?', 'Isolamento.', FALSE UNION ALL
-    SELECT 'Uma transferência entre contas precisa ser integral ou não ocorrer. Qual propriedade ACID atende a isso?', 'Durabilidade.', FALSE UNION ALL
-    SELECT 'Uma transferência entre contas precisa ser integral ou não ocorrer. Qual propriedade ACID atende a isso?', 'Consistência, isoladamente.', FALSE UNION ALL
-    
-    -- Q43
-    SELECT 'Duas transações atualizam o mesmo saldo simultaneamente. Qual recurso ajuda a evitar atualização perdida?', 'Remover a chave primária da tabela.', FALSE UNION ALL
-    SELECT 'Duas transações atualizam o mesmo saldo simultaneamente. Qual recurso ajuda a evitar atualização perdida?', 'Executar somente consultas SELECT sem transação.', FALSE UNION ALL
-    SELECT 'Duas transações atualizam o mesmo saldo simultaneamente. Qual recurso ajuda a evitar atualização perdida?', 'Desativar os logs de aplicação.', FALSE UNION ALL
-    SELECT 'Duas transações atualizam o mesmo saldo simultaneamente. Qual recurso ajuda a evitar atualização perdida?', 'Controle de concorrência por bloqueio ou versão.', TRUE UNION ALL
-    
-    -- Q44
-    SELECT 'Qual abordagem reduz o problema N+1 consultas ao carregar pedidos e seus itens?', 'Realizar uma consulta adicional para cada item.', FALSE UNION ALL
-    SELECT 'Qual abordagem reduz o problema N+1 consultas ao carregar pedidos e seus itens?', 'Desabilitar todas as chaves estrangeiras.', FALSE UNION ALL
-    SELECT 'Qual abordagem reduz o problema N+1 consultas ao carregar pedidos e seus itens?', 'Enviar a senha do banco ao cliente.', FALSE UNION ALL
-    SELECT 'Qual abordagem reduz o problema N+1 consultas ao carregar pedidos e seus itens?', 'Buscar os dados relacionados em lote, com JOIN ou consultas agrupadas.', TRUE UNION ALL
-    
-    -- Q45
-    SELECT 'Em uma API pública, qual mecanismo limita o número de requisições por cliente em uma janela?', 'Serialização JSON.', FALSE UNION ALL
-    SELECT 'Em uma API pública, qual mecanismo limita o número de requisições por cliente em uma janela?', 'Normalização relacional.', FALSE UNION ALL
-    SELECT 'Em uma API pública, qual mecanismo limita o número de requisições por cliente em uma janela?', 'Rate limiting.', TRUE UNION ALL
-    SELECT 'Em uma API pública, qual mecanismo limita o número de requisições por cliente em uma janela?', 'Renderização do DOM.', FALSE UNION ALL
-    
-    -- Q46
-    SELECT 'Uma rota recebe o ID do usuário no corpo da requisição. Como evitar acesso indevido a dados de outro usuário?', 'Confiar no ID enviado pelo cliente sem verificações.', FALSE UNION ALL
-    SELECT 'Uma rota recebe o ID do usuário no corpo da requisição. Como evitar acesso indevido a dados de outro usuário?', 'Validar autorização sobre o recurso para a identidade autenticada.', TRUE UNION ALL
-    SELECT 'Uma rota recebe o ID do usuário no corpo da requisição. Como evitar acesso indevido a dados de outro usuário?', 'Ocultar o botão de acesso no front-end.', FALSE UNION ALL
-    SELECT 'Uma rota recebe o ID do usuário no corpo da requisição. Como evitar acesso indevido a dados de outro usuário?', 'Trocar o nome da rota para um valor aleatório.', FALSE UNION ALL
-    
-    -- Q47
-    SELECT 'Qual resposta é mais adequada para uma atualização condicional com ETag incompatível e If-Match?', '412 Precondition Failed.', TRUE UNION ALL
-    SELECT 'Qual resposta é mais adequada para uma atualização condicional com ETag incompatível e If-Match?', '201 Created.', FALSE UNION ALL
-    SELECT 'Qual resposta é mais adequada para uma atualização condicional com ETag incompatível e If-Match?', '204 No Content.', FALSE UNION ALL
-    SELECT 'Qual resposta é mais adequada para uma atualização condicional com ETag incompatível e If-Match?', '101 Switching Protocols.', FALSE UNION ALL
-    
-    -- Q48
-    SELECT 'Uma API precisa manter compatibilidade ao adicionar um campo opcional em JSON. Qual medida é mais adequada?', 'Adicionar o campo sem remover nem alterar o significado dos existentes.', TRUE UNION ALL
-    SELECT 'Uma API precisa manter compatibilidade ao adicionar um campo opcional em JSON. Qual medida é mais adequada?', 'Renomear todos os campos sem aviso.', FALSE UNION ALL
-    SELECT 'Uma API precisa manter compatibilidade ao adicionar um campo opcional em JSON. Qual medida é mais adequada?', 'Trocar todas as respostas por texto não estruturado.', FALSE UNION ALL
-    SELECT 'Uma API precisa manter compatibilidade ao adicionar um campo opcional em JSON. Qual medida é mais adequada?', 'Remover o identificador de cada recurso.', FALSE UNION ALL
-    
-    -- Q49
-    SELECT 'Em um endpoint de listagem com muitos registros, qual paginação tende a ser mais estável diante de inserções frequentes?', 'Paginação sem qualquer ordenação.', FALSE UNION ALL
-    SELECT 'Em um endpoint de listagem com muitos registros, qual paginação tende a ser mais estável diante de inserções frequentes?', 'Retornar todos os registros em uma resposta.', FALSE UNION ALL
-    SELECT 'Em um endpoint de listagem com muitos registros, qual paginação tende a ser mais estável diante de inserções frequentes?', 'Escolher uma página aleatória em cada requisição.', FALSE UNION ALL
-    SELECT 'Em um endpoint de listagem com muitos registros, qual paginação tende a ser mais estável diante de inserções frequentes?', 'Paginação por cursor baseada em ordenação estável.', TRUE UNION ALL
-    
-    -- Q50
-    SELECT 'Um serviço grava um pedido e precisa publicar um evento de forma confiável. Qual padrão reduz inconsistências entre gravação e publicação?' AS enun, 'Polling do navegador sem persistência.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Um serviço grava um pedido e precisa publicar um evento de forma confiável. Qual padrão reduz inconsistências entre gravação e publicação?', 'Exclusão das transações do banco.', FALSE UNION ALL
-    SELECT 'Um serviço grava um pedido e precisa publicar um evento de forma confiável. Qual padrão reduz inconsistências entre gravação e publicação?', 'Transactional outbox.', TRUE UNION ALL
-    SELECT 'Um serviço grava um pedido e precisa publicar um evento de forma confiável. Qual padrão reduz inconsistências entre gravação e publicação?', 'Envio de evento antes de qualquer validação.', FALSE UNION ALL
-    
-    -- Q51
-    SELECT 'Uma API recebe requisições repetidas de pagamento após timeout. Qual comportamento é mais seguro?' AS enun, 'Cobrar novamente sempre que houver timeout.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Uma API recebe requisições repetidas de pagamento após timeout. Qual comportamento é mais seguro?', 'Reutilizar a mesma chave de idempotência e retornar o resultado da operação original.', TRUE UNION ALL
-    SELECT 'Uma API recebe requisições repetidas de pagamento após timeout. Qual comportamento é mais seguro?', 'Ignorar identificadores de operação.', FALSE UNION ALL
-    SELECT 'Uma API recebe requisições repetidas de pagamento após timeout. Qual comportamento é mais seguro?', 'Remover a autenticação para acelerar a resposta.', FALSE UNION ALL
-    
-    -- Q52
-    SELECT 'Qual medida reduz o risco de exposição de dados sensíveis em logs de API?' AS enun, 'Registrar cabeçalhos Authorization integralmente.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Qual medida reduz o risco de exposição de dados sensíveis em logs de API?', 'Mascarar ou omitir tokens, senhas e informações sensíveis.', TRUE UNION ALL
-    SELECT 'Qual medida reduz o risco de exposição de dados sensíveis em logs de API?', 'Gravar senhas em texto puro em cada exceção.', FALSE UNION ALL
-    SELECT 'Qual medida reduz o risco de exposição de dados sensíveis em logs de API?', 'Publicar logs de produção sem controle de acesso.', FALSE UNION ALL
-    
-    -- Q53
-    SELECT 'Como evitar que uma API retorne dados de um pedido pertencente a outro cliente?' AS enun, 'Aplicar autorização por objeto no servidor antes de retornar o pedido.' AS texto, TRUE AS correta UNION ALL
-    SELECT 'Como evitar que uma API retorne dados de um pedido pertencente a outro cliente?', 'Verificar apenas se o usuário está autenticado.', FALSE UNION ALL
-    SELECT 'Como evitar que uma API retorne dados de um pedido pertencente a outro cliente?', 'Confiar na ocultação do link no navegador.', FALSE UNION ALL
-    SELECT 'Como evitar que uma API retorne dados de um pedido pertencente a outro cliente?', 'Usar identificadores numéricos maiores.', FALSE UNION ALL
-    
-    -- Q54
-    SELECT 'Em uma transação, qual propriedade ACID assegura que dados confirmados sobrevivam a falhas conforme as garantias do SGBD?' AS enun, 'Atomicidade.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Em uma transação, qual propriedade ACID assegura que dados confirmados sobrevivam a falhas conforme as garantias do SGBD?', 'Isolamento.', FALSE UNION ALL
-    SELECT 'Em uma transação, qual propriedade ACID assegura que dados confirmados sobrevivam a falhas conforme as garantias do SGBD?', 'Disponibilidade.', FALSE UNION ALL
-    SELECT 'Em uma transação, qual propriedade ACID assegura que dados confirmados sobrevivam a falhas conforme as garantias do SGBD?', 'Durabilidade.', TRUE UNION ALL
-    
-    -- Q55
-    SELECT 'Em uma API, quando o servidor aceita uma tarefa assíncrona ainda não concluída, qual código é adequado?' AS enun, '200 OK como garantia de conclusão.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Em uma API, quando o servidor aceita uma tarefa assíncrona ainda não concluída, qual código é adequado?', '404 Not Found.', FALSE UNION ALL
-    SELECT 'Em uma API, quando o servidor aceita uma tarefa assíncrona ainda não concluída, qual código é adequado?', '202 Accepted.', TRUE UNION ALL
-    SELECT 'Em uma API, quando o servidor aceita uma tarefa assíncrona ainda não concluída, qual código é adequado?', '409 Conflict obrigatoriamente.', FALSE UNION ALL
-    
-    -- Q56
-    SELECT 'Qual estratégia melhora a confiabilidade de chamadas a um serviço externo instável sem provocar sobrecarga contínua?' AS enun, 'Retentativas infinitas e imediatas.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Qual estratégia melhora a confiabilidade de chamadas a um serviço externo instável sem provocar sobrecarga contínua?', 'Remover todos os limites de conexão.', FALSE UNION ALL
-    SELECT 'Qual estratégia melhora a confiabilidade de chamadas a um serviço externo instável sem provocar sobrecarga contínua?', 'Timeout, retentativas limitadas com backoff e circuit breaker.', TRUE UNION ALL
-    SELECT 'Qual estratégia melhora a confiabilidade de chamadas a um serviço externo instável sem provocar sobrecarga contínua?', 'Ignorar os erros e declarar sucesso.', FALSE UNION ALL
-    
-    -- Q57
-    SELECT 'Qual é a principal finalidade de um índice composto em colunas frequentemente filtradas em conjunto?' AS enun, 'Garantir que toda consulta seja instantânea.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Qual é a principal finalidade de um índice composto em colunas frequentemente filtradas em conjunto?', 'Acelerar consultas compatíveis com a ordem e a estrutura do índice.', TRUE UNION ALL
-    SELECT 'Qual é a principal finalidade de um índice composto em colunas frequentemente filtradas em conjunto?', 'Eliminar a necessidade de chaves primárias.', FALSE UNION ALL
-    SELECT 'Qual é a principal finalidade de um índice composto em colunas frequentemente filtradas em conjunto?', 'Impedir qualquer operação de atualização.', FALSE UNION ALL
-    
-    -- Q58
-    SELECT 'Uma API permite alterar o campo papel do usuário. Qual controle é essencial?' AS enun, 'Restringir explicitamente os campos alteráveis e validar permissões.' AS texto, TRUE AS correta UNION ALL
-    SELECT 'Uma API permite alterar o campo papel do usuário. Qual controle é essencial?', 'Aceitar todos os campos recebidos sem filtragem.', FALSE UNION ALL
-    SELECT 'Uma API permite alterar o campo papel do usuário. Qual controle é essencial?', 'Deixar a decisão apenas para o JavaScript do cliente.', FALSE UNION ALL
-    SELECT 'Uma API permite alterar o campo papel do usuário. Qual controle é essencial?', 'Confiar no nome do campo enviado.', FALSE UNION ALL
-    
-    -- Q59
-    SELECT 'Em uma arquitetura com múltiplas instâncias de API, onde guardar sessões compartilhadas quando necessário?' AS enun, 'Exclusivamente em variável local de uma instância.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Em uma arquitetura com múltiplas instâncias de API, onde guardar sessões compartilhadas quando necessário?', 'Apenas em arquivos temporários de cada processo.', FALSE UNION ALL
-    SELECT 'Em uma arquitetura com múltiplas instâncias de API, onde guardar sessões compartilhadas quando necessário?', 'Somente no código-fonte da aplicação.', FALSE UNION ALL
-    SELECT 'Em uma arquitetura com múltiplas instâncias de API, onde guardar sessões compartilhadas quando necessário?', 'Em armazenamento compartilhado apropriado, externo à memória local de cada instância.', TRUE UNION ALL
-    
-    -- Q60
-    SELECT 'Qual técnica ajuda a detectar alterações incompatíveis no contrato de uma API antes da publicação?' AS enun, 'Remover a documentação OpenAPI.' AS texto, FALSE AS correta UNION ALL
-    SELECT 'Qual técnica ajuda a detectar alterações incompatíveis no contrato de uma API antes da publicação?', 'Ignorar códigos HTTP nas respostas.', FALSE UNION ALL
-    SELECT 'Qual técnica ajuda a detectar alterações incompatíveis no contrato de uma API antes da publicação?', 'Testar apenas a aparência do formulário.', FALSE UNION ALL
-    SELECT 'Qual técnica ajuda a detectar alterações incompatíveis no contrato de uma API antes da publicação?', 'Testes de contrato comparando implementações e especificações.', TRUE UNION ALL
-) t ON t.enun = q.enunciado
-WHERE q.quiz_id = @quiz_ds2_id
-  AND NOT EXISTS (
-      SELECT 1 FROM alternativa a WHERE a.questao_id = q.id AND a.texto_alternativa = t.texto
-  );
+INSERT INTO alternativa (
+    questao_id,
+    texto_alternativa,
+    is_correta
+)
+VALUES
+-- Questão 21 | Correta: B
+(1, 'Criar um novo pedido a cada repetição.', FALSE),
+(1, 'Adotar uma chave de idempotência persistida e associada ao resultado.', TRUE),
+(1, 'Trocar POST por GET sem alterar a semântica.', FALSE),
+(1, 'Desabilitar toda validação de entrada.', FALSE),
 
+-- Questão 22 | Correta: A
+(2, 'Atomicidade.', TRUE),
+(2, 'Isolamento.', FALSE),
+(2, 'Durabilidade.', FALSE),
+(2, 'Consistência, isoladamente.', FALSE),
+
+-- Questão 23 | Correta: D
+(3, 'Remover a chave primária da tabela.', FALSE),
+(3, 'Executar somente consultas SELECT sem transação.', FALSE),
+(3, 'Desativar os logs de aplicação.', FALSE),
+(3, 'Controle de concorrência por bloqueio ou versão.', TRUE),
+
+-- Questão 24 | Correta: D
+(4, 'Realizar uma consulta adicional para cada item.', FALSE),
+(4, 'Desabilitar todas as chaves estrangeiras.', FALSE),
+(4, 'Enviar a senha do banco ao cliente.', FALSE),
+(4, 'Buscar os dados relacionados em lote, com JOIN ou consultas agrupadas.', TRUE),
+
+-- Questão 25 | Correta: C
+(5, 'Serialização JSON.', FALSE),
+(5, 'Normalização relacional.', FALSE),
+(5, 'Rate limiting.', TRUE),
+(5, 'Renderização do DOM.', FALSE),
+
+-- Questão 26 | Correta: B
+(6, 'Confiar no ID enviado pelo cliente sem verificações.', FALSE),
+(6, 'Validar autorização sobre o recurso para a identidade autenticada.', TRUE),
+(6, 'Ocultar o botão de acesso no front-end.', FALSE),
+(6, 'Trocar o nome da rota para um valor aleatório.', FALSE),
+
+-- Questão 27 | Correta: A
+(7, '412 Precondition Failed.', TRUE),
+(7, '201 Created.', FALSE),
+(7, '204 No Content.', FALSE),
+(7, '101 Switching Protocols.', FALSE),
+
+-- Questão 28 | Correta: A
+(8, 'Adicionar o campo sem remover nem alterar o significado dos existentes.', TRUE),
+(8, 'Renomear todos os campos sem aviso.', FALSE),
+(8, 'Trocar todas as respostas por texto não estruturado.', FALSE),
+(8, 'Remover o identificador de cada recurso.', FALSE),
+
+-- Questão 29 | Correta: D
+(9, 'Paginação sem qualquer ordenação.', FALSE),
+(9, 'Retornar todos os registros em uma resposta.', FALSE),
+(9, 'Escolher uma página aleatória em cada requisição.', FALSE),
+(9, 'Paginação por cursor baseada em ordenação estável.', TRUE),
+
+-- Questão 30 | Correta: C
+(10, 'Polling do navegador sem persistência.', FALSE),
+(10, 'Exclusão das transações do banco.', FALSE),
+(10, 'Transactional outbox.', TRUE),
+(10, 'Envio de evento antes de qualquer validação.', FALSE),
+
+-- Questão 31 | Correta: B
+(11, 'Cobrar novamente sempre que houver timeout.', FALSE),
+(11, 'Reutilizar a mesma chave de idempotência e retornar o resultado da operação original.', TRUE),
+(11, 'Ignorar identificadores de operação.', FALSE),
+(11, 'Remover a autenticação para acelerar a resposta.', FALSE),
+
+-- Questão 32 | Correta: B
+(12, 'Registrar cabeçalhos Authorization integralmente.', FALSE),
+(12, 'Mascarar ou omitir tokens, senhas e informações sensíveis.', TRUE),
+(12, 'Gravar senhas em texto puro em cada exceção.', FALSE),
+(12, 'Publicar logs de produção sem controle de acesso.', FALSE),
+
+-- Questão 33 | Correta: A
+(13, 'Aplicar autorização por objeto no servidor antes de retornar o pedido.', TRUE),
+(13, 'Verificar apenas se o usuário está autenticado.', FALSE),
+(13, 'Confiar na ocultação do link no navegador.', FALSE),
+(13, 'Usar identificadores numéricos maiores.', FALSE),
+
+-- Questão 34 | Correta: D
+(14, 'Atomicidade.', FALSE),
+(14, 'Isolamento.', FALSE),
+(14, 'Disponibilidade.', FALSE),
+(14, 'Durabilidade.', TRUE),
+
+-- Questão 35 | Correta: C
+(15, '200 OK como garantia de conclusão.', FALSE),
+(15, '404 Not Found.', FALSE),
+(15, '202 Accepted.', TRUE),
+(15, '409 Conflict obrigatoriamente.', FALSE),
+
+-- Questão 36 | Correta: C
+(16, 'Retentativas infinitas e imediatas.', FALSE),
+(16, 'Remover todos os limites de conexão.', FALSE),
+(16, 'Timeout, retentativas limitadas com backoff e circuit breaker.', TRUE),
+(16, 'Ignorar os erros e declarar sucesso.', FALSE),
+
+-- Questão 37 | Correta: B
+(17, 'Garantir que toda consulta seja instantânea.', FALSE),
+(17, 'Acelerar consultas compatíveis com a ordem e a estrutura do índice.', TRUE),
+(17, 'Eliminar a necessidade de chaves primárias.', FALSE),
+(17, 'Impedir qualquer operação de atualização.', FALSE),
+
+-- Questão 38 | Correta: A
+(18, 'Restringir explicitamente os campos alteráveis e validar permissões.', TRUE),
+(18, 'Aceitar todos os campos recebidos sem filtragem.', FALSE),
+(18, 'Deixar a decisão apenas para o JavaScript do cliente.', FALSE),
+(18, 'Confiar no nome do campo enviado.', FALSE),
+
+-- Questão 39 | Correta: D
+(19, 'Exclusivamente em variável local de uma instância.', FALSE),
+(19, 'Apenas em arquivos temporários de cada processo.', FALSE),
+(19, 'Somente no código-fonte da aplicação.', FALSE),
+(19, 'Em armazenamento compartilhado apropriado, externo à memória local de cada instância.', TRUE),
+
+-- Questão 40 | Correta: D
+(20, 'Remover a documentação OpenAPI.', FALSE),
+(20, 'Ignorar códigos HTTP nas respostas.', FALSE),
+(20, 'Testar apenas a aparência do formulário.', FALSE),
+(20, 'Testes de contrato comparando implementações e especificações.', TRUE);
 
 -- ============================================================
--- VALIDAÇÃO DAS 20 QUESTÕES MÉDIAS DE DS
+-- VALIDAÇÃO DAS 20 QUESTÕES MÉDIAS DE DS II
 -- ============================================================
 
 SELECT
