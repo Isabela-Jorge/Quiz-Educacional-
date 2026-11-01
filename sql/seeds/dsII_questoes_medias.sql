@@ -1,12 +1,43 @@
 -- ============================================================
+-- ATENÇÃO: IDENTIFICADORES DAS QUESTÕES
+-- ============================================================
+-- Os IDs utilizados neste script correspondem ao banco
+-- de dados original do projeto.
+--
+-- Como a tabela questao utiliza AUTO_INCREMENT, os IDs
+-- podem ser diferentes em outros bancos de dados.
+--
+-- ORIENTAÇÕES PARA EXECUÇÃO:
+-- 1. Execute primeiro o INSERT das questões.
+-- 2. Consulte os IDs gerados:
+--
+--    SELECT id, enunciado
+--    FROM questao
+--    WHERE quiz_id = @quiz_ds2_id
+--    ORDER BY id;
+--
+-- 3. Confira os IDs das questões cadastradas.
+-- 4. Se necessário, atualize os IDs no INSERT das
+--    alternativas antes de executá-lo.
+-- 5. Execute o INSERT das alternativas.
+--
+-- IMPORTANTE:
+-- Não execute novamente os INSERTs caso os registros
+-- já estejam cadastrados, para evitar duplicações.
+-- ============================================================
+
+-- ============================================================
 -- PROJETO: Quiz Integrador
 -- DISCIPLINA: Desenvolvimento de Sistemas II - 3º Módulo
--- TOTAL: 20 Questões Médias (10 pts, 15 seg)
+-- DIFICULDADE: MÉDIO
+-- TOTAL: 20 questões
+-- PONTULAÇÃO: 10 pontos por questão
+-- TEMPO: 15 segundos por questão
 -- ============================================================
 
 USE quiz_ds_db;
 
--- Identificar o quiz da disciplina de Desenvolvimento de Sistemas II
+-- Identificar o quiz de Desenvolvimento de Sistemas II
 SET @quiz_ds2_id = (
     SELECT q.id
     FROM quiz q
@@ -17,226 +48,172 @@ SET @quiz_ds2_id = (
 );
 
 -- ============================================================
--- Inserção das Questões Médias (Evitando duplicações)
+-- DS II | Questões 21 a 40 | Nível médio
+-- 10 pontos | 15 segundos
 -- ============================================================
 
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual é a diferença entre autenticação e autorização?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual é a diferença entre autenticação e autorização?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual propriedade caracteriza uma operação HTTP idempotente?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual propriedade caracteriza uma operação HTTP idempotente?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual código HTTP é adequado quando o cliente envia JSON sintaticamente inválido?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual código HTTP é adequado quando o cliente envia JSON sintaticamente inválido?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual código HTTP indica ausência de credenciais válidas para acessar um recurso protegido?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual código HTTP indica ausência de credenciais válidas para acessar um recurso protegido?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual código HTTP é apropriado quando um usuário autenticado não possui permissão?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual código HTTP é apropriado quando um usuário autenticado não possui permissão?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Para atualizar parcialmente um recurso em uma API HTTP, qual método é usual?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Para atualizar parcialmente um recurso em uma API HTTP, qual método é usual?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual é o benefício de utilizar parâmetros em consultas SQL?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual é o benefício de utilizar parâmetros em consultas SQL?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'O que representa uma transação de banco de dados?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'O que representa uma transação de banco de dados?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual é a função de ROLLBACK em uma transação?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual é a função de ROLLBACK em uma transação?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Em uma API paginada, para que serve um parâmetro de limite?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Em uma API paginada, para que serve um parâmetro de limite?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual é a principal utilidade do OpenAPI?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual é a principal utilidade do OpenAPI?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Por que validar os dados recebidos por uma API?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Por que validar os dados recebidos por uma API?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual é a finalidade de um middleware em um servidor web?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual é a finalidade de um middleware em um servidor web?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual é a diferença entre PUT e PATCH no uso comum de APIs?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual é a diferença entre PUT e PATCH no uso comum de APIs?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual é a função de uma chave estrangeira?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual é a função de uma chave estrangeira?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'O que significa o código HTTP 409 Conflict?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'O que significa o código HTTP 409 Conflict?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual prática é adequada para armazenar senhas de usuários?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual prática é adequada para armazenar senhas de usuários?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'O que é um teste de integração de API?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'O que é um teste de integração de API?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'Qual é o objetivo do tratamento centralizado de erros?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'Qual é o objetivo do tratamento centralizado de erros?');
-
-INSERT INTO questao (quiz_id, enunciado, dificuldade, pontos, tempo_limite_segundos)
-SELECT @quiz_ds2_id, 'O que é versionamento de API?', 'MEDIO', 10, 15 FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM questao WHERE quiz_id = @quiz_ds2_id AND enunciado = 'O que é versionamento de API?');
-
+INSERT INTO questao (
+    quiz_id,
+    enunciado,
+    dificuldade,
+    pontos,
+    tempo_limite_segundos
+)
+VALUES
+(@quiz_ds2_id, 'Qual é a diferença fundamental entre uma classe abstrata e uma interface em POO?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que é a sobrecarga de métodos (Overloading)?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que caracteriza a sobrescrita de métodos (Overriding)?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que é um padrão de projeto (Design Pattern) Creational como o Singleton?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual é o papel da camada View no padrão MVC?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'No padrão MVC, qual é a principal responsabilidade do Controller?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual cláusula SQL é utilizada para agrupar registros e aplicar funções de agregação como SUM ou COUNT?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual a diferença entre as cláusulas WHERE e HAVING no SQL?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que faz o comando INNER JOIN em uma consulta SQL?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual é o comportamento do LEFT JOIN em relação aos registros da tabela da esquerda?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Em bancos de dados relacionais, o que define uma transação SQL (BEGIN, COMMIT, ROLLBACK)?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que é um índice (INDEX) em uma tabela de banco de dados relacional?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que é uma API RESTful?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual verbo HTTP é utilizado para atualizar parcialmente um recurso existente em uma API REST?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual código de status HTTP indica que o recurso solicitado não foi encontrado no servidor?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que é o JWT (JSON Web Token) e qual é seu uso comum em APIs?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que representa o comando `git merge` em um fluxo de trabalho com Git?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'Qual é a finalidade do arquivo `.gitignore` em um projeto versionado com Git?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que é a Injeção de Dependência (Dependency Injection)?', 'MEDIO', 10, 15),
+(@quiz_ds2_id, 'O que significa ORM (Object-Relational Mapping) no desenvolvimento de software?', 'MEDIO', 10, 15);
 
 -- ============================================================
--- INSERÇÃO DAS ALTERNATIVAS USANDO O ENUNCIADO COMO REFERÊNCIA
+-- DS II | Alternativas das questões 21 a 40
+-- (Nota: Ajuste os IDs da coluna questao_id conforme a sua base local gerada)
 -- ============================================================
 
-INSERT INTO alternativa (questao_id, texto_alternativa, is_correta)
-SELECT q.id, t.texto, t.correta
-FROM questao q
-JOIN (
-    -- Q21
-    SELECT 'Qual é a diferença entre autenticação e autorização?' AS enun, 'Autenticação confirma identidade; autorização verifica permissões.' AS texto, TRUE AS correta UNION ALL
-    SELECT 'Qual é a diferença entre autenticação e autorização?', 'Autenticação define permissões; autorização verifica identidade.', FALSE UNION ALL
-    SELECT 'Qual é a diferença entre autenticação e autorização?', 'Ambas apenas criptografam o banco de dados.', FALSE UNION ALL
-    SELECT 'Qual é a diferença entre autenticação e autorização?', 'Ambas são sinônimos de validação de JSON.', FALSE UNION ALL
-    
-    -- Q22
-    SELECT 'Qual propriedade caracteriza uma operação HTTP idempotente?', 'Ela sempre cria um novo registro.', FALSE UNION ALL
-    SELECT 'Qual propriedade caracteriza uma operação HTTP idempotente?', 'Ela nunca retorna um código de erro.', FALSE UNION ALL
-    SELECT 'Qual propriedade caracteriza uma operação HTTP idempotente?', 'Ela obrigatoriamente utiliza o método POST.', FALSE UNION ALL
-    SELECT 'Qual propriedade caracteriza uma operação HTTP idempotente?', 'Repeti-la produz o mesmo efeito pretendido no estado do servidor.', TRUE UNION ALL
-    
-    -- Q23
-    SELECT 'Qual código HTTP é adequado quando o cliente envia JSON sintaticamente inválido?', '200 OK.', FALSE UNION ALL
-    SELECT 'Qual código HTTP é adequado quando o cliente envia JSON sintaticamente inválido?', '201 Created.', FALSE UNION ALL
-    SELECT 'Qual código HTTP é adequado quando o cliente envia JSON sintaticamente inválido?', '400 Bad Request.', TRUE UNION ALL
-    SELECT 'Qual código HTTP é adequado quando o cliente envia JSON sintaticamente inválido?', '304 Not Modified.', FALSE UNION ALL
-    
-    -- Q24
-    SELECT 'Qual código HTTP indica ausência de credenciais válidas para acessar um recurso protegido?', '403 Forbidden, em qualquer situação.', FALSE UNION ALL
-    SELECT 'Qual código HTTP indica ausência de credenciais válidas para acessar um recurso protegido?', '409 Conflict.', FALSE UNION ALL
-    SELECT 'Qual código HTTP indica ausência de credenciais válidas para acessar um recurso protegido?', '401 Unauthorized.', TRUE UNION ALL
-    SELECT 'Qual código HTTP indica ausência de credenciais válidas para acessar um recurso protegido?', '204 No Content.', FALSE UNION ALL
-    
-    -- Q25
-    SELECT 'Qual código HTTP é apropriado quando um usuário autenticado não possui permissão?', '201 Created.', FALSE UNION ALL
-    SELECT 'Qual código HTTP é apropriado quando um usuário autenticado não possui permissão?', '403 Forbidden.', TRUE UNION ALL
-    SELECT 'Qual código HTTP é apropriado quando um usuário autenticado não possui permissão?', '301 Moved Permanently.', FALSE UNION ALL
-    SELECT 'Qual código HTTP é apropriado quando um usuário autenticado não possui permissão?', '100 Continue.', FALSE UNION ALL
-    
-    -- Q26
-    SELECT 'Para atualizar parcialmente um recurso em uma API HTTP, qual método é usual?', 'PATCH.', TRUE UNION ALL
-    SELECT 'Para atualizar parcialmente um recurso em uma API HTTP, qual método é usual?', 'HEAD.', FALSE UNION ALL
-    SELECT 'Para atualizar parcialmente um recurso em uma API HTTP, qual método é usual?', 'CONNECT.', FALSE UNION ALL
-    SELECT 'Para atualizar parcialmente um recurso em uma API HTTP, qual método é usual?', 'TRACE.', FALSE UNION ALL
-    
-    -- Q27
-    SELECT 'Qual é o benefício de utilizar parâmetros em consultas SQL?', 'Permitir que o usuário execute qualquer SQL.', FALSE UNION ALL
-    SELECT 'Qual é o benefício de utilizar parâmetros em consultas SQL?', 'Desativar as restrições de integridade.', FALSE UNION ALL
-    SELECT 'Qual é o benefício de utilizar parâmetros em consultas SQL?', 'Garantir que todas as consultas usem índices.', FALSE UNION ALL
-    SELECT 'Qual é o benefício de utilizar parâmetros em consultas SQL?', 'Separar dados do comando e reduzir riscos de injeção de SQL.', TRUE UNION ALL
-    
-    -- Q28
-    SELECT 'O que representa uma transação de banco de dados?', 'Um único arquivo JSON obrigatório.', FALSE UNION ALL
-    SELECT 'O que representa uma transação de banco de dados?', 'Um tipo de rota HTTP.', FALSE UNION ALL
-    SELECT 'O que representa uma transação de banco de dados?', 'Uma interface visual para consultas.', FALSE UNION ALL
-    SELECT 'O que representa uma transação de banco de dados?', 'Um conjunto de operações tratado como unidade de trabalho.', TRUE UNION ALL
-    
-    -- Q29
-    SELECT 'Qual é a função de ROLLBACK em uma transação?', 'Confirmar definitivamente todas as alterações.', FALSE UNION ALL
-    SELECT 'Qual é a função de ROLLBACK em uma transação?', 'Criar um índice em toda tabela.', FALSE UNION ALL
-    SELECT 'Qual é a função de ROLLBACK em uma transação?', 'Desfazer alterações ainda não confirmadas da transação.', TRUE UNION ALL
-    SELECT 'Qual é a função de ROLLBACK em uma transação?', 'Excluir o banco de dados completo.', FALSE UNION ALL
-    
-    -- Q30
-    SELECT 'Em uma API paginada, para que serve um parâmetro de limite?', 'Definir a senha do usuário.', FALSE UNION ALL
-    SELECT 'Em uma API paginada, para que serve um parâmetro de limite?', 'Controlar a quantidade máxima de itens retornados por página.', TRUE UNION ALL
-    SELECT 'Em uma API paginada, para que serve um parâmetro de limite?', 'Indicar o formato de uma imagem.', FALSE UNION ALL
-    SELECT 'Em uma API paginada, para que serve um parâmetro de limite?', 'Escolher a linguagem do servidor.', FALSE UNION ALL
-    
-    -- Q31
-    SELECT 'Qual é a principal utilidade do OpenAPI?', 'Descrever de forma padronizada o contrato de uma API HTTP.', TRUE UNION ALL
-    SELECT 'Qual é a principal utilidade do OpenAPI?', 'Substituir o protocolo HTTP.', FALSE UNION ALL
-    SELECT 'Qual é a principal utilidade do OpenAPI?', 'Armazenar permanentemente os dados de produção.', FALSE UNION ALL
-    SELECT 'Qual é a principal utilidade do OpenAPI?', 'Gerar energia para servidores.', FALSE UNION ALL
-    
-    -- Q32
-    SELECT 'Por que validar os dados recebidos por uma API?', 'Para rejeitar entradas inválidas antes de executar operações.', TRUE UNION ALL
-    SELECT 'Por que validar os dados recebidos por uma API?', 'Para garantir que qualquer entrada seja aceita.', FALSE UNION ALL
-    SELECT 'Por que validar os dados recebidos por uma API?', 'Para remover a necessidade de autenticação.', FALSE UNION ALL
-    SELECT 'Por que validar os dados recebidos por uma API?', 'Para impedir toda falha de infraestrutura.', FALSE UNION ALL
-    
-    -- Q33
-    SELECT 'Qual é a finalidade de um middleware em um servidor web?', 'Substituir fisicamente o roteador.', FALSE UNION ALL
-    SELECT 'Qual é a finalidade de um middleware em um servidor web?', 'Criar somente arquivos CSS.', FALSE UNION ALL
-    SELECT 'Qual é a finalidade de um middleware em um servidor web?', 'Converter automaticamente SQL em HTML.', FALSE UNION ALL
-    SELECT 'Qual é a finalidade de um middleware em um servidor web?', 'Executar lógica intermediária no processamento de requisições.', TRUE UNION ALL
-    
-    -- Q34
-    SELECT 'Qual é a diferença entre PUT e PATCH no uso comum de APIs?', 'PUT é apenas leitura; PATCH é apenas exclusão.', FALSE UNION ALL
-    SELECT 'Qual é a diferença entre PUT e PATCH no uso comum de APIs?', 'Ambos servem exclusivamente para autenticação.', FALSE UNION ALL
-    SELECT 'Qual é a diferença entre PUT e PATCH no uso comum de APIs?', 'PUT representa substituição do recurso; PATCH, alteração parcial.', TRUE UNION ALL
-    SELECT 'Qual é a diferença entre PUT e PATCH no uso comum de APIs?', 'PATCH sempre substitui integralmente o recurso.', FALSE UNION ALL
-    
-    -- Q35
-    SELECT 'Qual é a função de uma chave estrangeira?', 'Criptografar todos os registros.', FALSE UNION ALL
-    SELECT 'Qual é a função de uma chave estrangeira?', 'Garantir referência válida a uma chave da tabela relacionada.', TRUE UNION ALL
-    SELECT 'Qual é a função de uma chave estrangeira?', 'Criar uma cópia automática de cada tabela.', FALSE UNION ALL
-    SELECT 'Qual é a função de uma chave estrangeira?', 'Definir a porta HTTP da aplicação.', FALSE UNION ALL
-    
-    -- Q36
-    SELECT 'O que significa o código HTTP 409 Conflict?', 'O servidor concluiu a criação sem conflito.', FALSE UNION ALL
-    SELECT 'O que significa o código HTTP 409 Conflict?', 'A operação conflita com o estado atual do recurso.', TRUE UNION ALL
-    SELECT 'O que significa o código HTTP 409 Conflict?', 'O conteúdo não foi modificado por cache.', FALSE UNION ALL
-    SELECT 'O que significa o código HTTP 409 Conflict?', 'A conexão foi estabelecida por WebSocket.', FALSE UNION ALL
-    
-    -- Q37
-    SELECT 'Qual prática é adequada para armazenar senhas de usuários?', 'Armazenar hashes produzidos por algoritmo apropriado para senhas.', TRUE UNION ALL
-    SELECT 'Qual prática é adequada para armazenar senhas de usuários?', 'Guardar senhas em texto puro para facilitar recuperação.', FALSE UNION ALL
-    SELECT 'Qual prática é adequada para armazenar senhas de usuários?', 'Usar apenas codificação Base64 como proteção.', FALSE UNION ALL
-    SELECT 'Qual prática é adequada para armazenar senhas de usuários?', 'Enviar a senha de todos os usuários em cada resposta.', FALSE UNION ALL
-    
-    -- Q38
-    SELECT 'O que é um teste de integração de API?', 'Um teste restrito à cor dos botões.', FALSE UNION ALL
-    SELECT 'O que é um teste de integração de API?', 'Um teste que nunca utiliza banco de dados.', FALSE UNION ALL
-    SELECT 'O que é um teste de integração de API?', 'Um teste executado somente antes da escrita do código.', FALSE UNION ALL
-    SELECT 'O que é um teste de integração de API?', 'Um teste que verifica a interação entre componentes reais ou integrados.', TRUE UNION ALL
-    
-    -- Q39
-    SELECT 'Qual é o objetivo do tratamento centralizado de erros?', 'Transformar qualquer erro em resposta 200.', FALSE UNION ALL
-    SELECT 'Qual é o objetivo do tratamento centralizado de erros?', 'Expor detalhes internos completos aos clientes.', FALSE UNION ALL
-    SELECT 'Qual é o objetivo do tratamento centralizado de erros?', 'Padronizar respostas e reduzir duplicação no tratamento de falhas.', TRUE UNION ALL
-    SELECT 'Qual é o objetivo do tratamento centralizado de erros?', 'Ignorar exceções sem registrar informações.', FALSE UNION ALL
-    
-    -- Q40
-    SELECT 'O que é versionamento de API?', 'A troca diária obrigatória do domínio.', FALSE UNION ALL
-    SELECT 'O que é versionamento de API?', 'A exclusão automática de todos os endpoints.', FALSE UNION ALL
-    SELECT 'O que é versionamento de API?', 'Uma estratégia para evoluir contratos e gerenciar compatibilidade.', TRUE UNION ALL
-    SELECT 'O que é versionamento de API?', 'O aumento da versão do sistema operacional.', FALSE UNION ALL
-) t ON t.enun = q.enunciado
-WHERE q.quiz_id = @quiz_ds2_id
-  AND NOT EXISTS (
-      SELECT 1 FROM alternativa a WHERE a.questao_id = q.id AND a.texto_alternativa = t.texto
-  );
+INSERT INTO alternativa (
+    questao_id,
+    texto_alternativa,
+    is_correta
+)
+VALUES
+-- Questão 21 | Correta: A
+(1, 'Interfaces não contêm código nem estado, enquanto classes abstratas podem ter métodos implementados e atributos.', TRUE),
+(1, 'Classes abstratas não podem ser herdadas por nenhuma outra classe.', FALSE),
+(1, 'Interfaces permitem criar instâncias diretamente com o operador new.', FALSE),
+(1, 'Não há diferença, ambas são termos idênticos para o mesmo conceito.', FALSE),
 
+-- Questão 22 | Correta: A
+(2, 'Definir na mesma classe métodos com o mesmo nome, mas com assinaturas/parâmetros diferentes.', TRUE),
+(2, 'Substituir a implementação de um método herdado da classe pai.', FALSE),
+(2, 'Deletar um método da memória em tempo de execução.', FALSE),
+(2, 'Importar métodos externos de bibliotecas de terceiros.', FALSE),
+
+-- Questão 23 | Correta: A
+(3, 'A redefinição em uma classe filha de um método herdado da classe pai com a mesma assinatura.', TRUE),
+(3, 'A criação de variáveis globais dentro de uma função.', FALSE),
+(3, 'O bloqueio de acesso a atributos privados.', FALSE),
+(3, 'A alteração do nome do método em tempo de compilação.', FALSE),
+
+-- Questão 24 | Correta: A
+(4, 'Um padrão que garante a existência de apenas uma instância de uma classe em toda a aplicação.', TRUE),
+(4, 'Um padrão para conectar múltiplos bancos de dados heterogêneos.', FALSE),
+(4, 'Uma estrutura para renderizar telas em HTML5.', FALSE),
+(4, 'Um método de criptografia de senhas.', FALSE),
+
+-- Questão 25 | Correta: A
+(5, 'Apresentar a interface de usuário e exibir os dados ao usuário.', TRUE),
+(5, 'Executar regras de negócio e validações complexas.', FALSE),
+(5, 'Gerenciar conexões e transações de banco de dados.', FALSE),
+(5, 'Interceptar requisições HTTP e rotear a aplicação.', FALSE),
+
+-- Questão 26 | Correta: A
+(6, 'Intermediar as requisições, acionando a Model e definindo qual View será exibida.', TRUE),
+(6, 'Armazenar as tabelas físicas no disco rígido.', FALSE),
+(6, 'Estilizar os componentes visuais com CSS.', FALSE),
+(6, 'Compilar o código-fonte da aplicação.', FALSE),
+
+-- Questão 27 | Correta: A
+(7, 'GROUP BY.', TRUE),
+(7, 'ORDER BY.', FALSE),
+(7, 'JOIN BY.', FALSE),
+(7, 'WHERE IN.', FALSE),
+
+-- Questão 28 | Correta: A
+(8, 'WHERE filtra linhas antes do agrupamento; HAVING filtra os resultados já agrupados.', TRUE),
+(8, 'HAVING só aceita colunas de texto; WHERE aceita apenas números.', FALSE),
+(8, 'WHERE é usado em DELETE; HAVING é usado exclusivamente em UPDATE.', FALSE),
+(8, 'Ambas são idênticas e intercambiáveis em qualquer ponto da consulta.', FALSE),
+
+-- Questão 29 | Correta: A
+(9, 'Retorna apenas os registros que possuem correspondência em ambas as tabelas relacionadas.', TRUE),
+(9, 'Retorna todos os registros da tabela da esquerda, independentemente de haver correspondência.', FALSE),
+(9, 'Combina dados de duas tabelas sem precisar de uma chave de ligação.', FALSE),
+(9, 'Deleta os registros duplicados entre duas tabelas.', FALSE),
+
+-- Questão 30 | Correta: A
+(10, 'Retorna todos os registros da tabela da esquerda e os correspondentes da tabela da direita (ou NULL).', TRUE),
+(10, 'Retorna apenas os registros que não existem na tabela da esquerda.', FALSE),
+(10, 'Exclui da busca os registros que contêm valores nulos na tabela da esquerda.', FALSE),
+(10, 'Inverte a ordem das colunas da tabela principal.', FALSE),
+
+-- Questão 31 | Correta: A
+(11, 'Um conjunto de operações executadas como uma unidade de trabalho única e atômica.', TRUE),
+(11, 'Um script que executa apenas em horários agendados.', FALSE),
+(11, 'Uma técnica para clonar tabelas inteiras instantaneamente.', FALSE),
+(11, 'Um backup automático de arquivos em nuvem.', FALSE),
+
+-- Questão 32 | Correta: A
+(12, 'Uma estrutura de dados que melhora a velocidade das operações de busca de registros.', TRUE),
+(12, 'Uma cópia de segurança em formato comprimido.', FALSE),
+(12, 'Uma chave estrangeira que aponta para outra base de dados.', FALSE),
+(12, 'Um campo destinado exclusivamente ao armazenamento de imagens.', FALSE),
+
+-- Questão 33 | Correta: A
+(13, 'Uma interface de programação baseada nos princípios da arquitetura REST e protocolo HTTP.', TRUE),
+(13, 'Um banco de dados orientado a documentos NoSQL.', FALSE),
+(13, 'Um formato de arquivo de configuração exclusivo do Linux.', FALSE),
+(13, 'Um servidor físico para armazenamento de backups.', FALSE),
+
+-- Questão 34 | Correta: A
+(14, 'PATCH.', TRUE),
+(14, 'GET.', FALSE),
+(14, 'POST.', FALSE),
+(14, 'DELETE.', FALSE),
+
+-- Questão 35 | Correta: A
+(15, '404 Not Found.', TRUE),
+(15, '200 OK.', FALSE),
+(15, '500 Internal Server Error.', FALSE),
+(15, '401 Unauthorized.', FALSE),
+
+-- Questão 36 | Correta: A
+(16, 'Um token compacto e assinado digitalmente usado para autenticação e troca segura de informações.', TRUE),
+(16, 'Um driver para conectar o banco de dados à placa de rede.', FALSE),
+(16, 'Uma linguagem de marcação de páginas dinâmicas.', FALSE),
+(16, 'Um compilador de código Java para a web.', FALSE),
+
+-- Questão 37 | Correta: A
+(17, 'A combinação das alterações de uma ramificação (branch) na branch atual.', TRUE),
+(17, 'A exclusão definitiva de todo o histórico do repositório.', FALSE),
+(17, 'O download das dependências do projeto.', FALSE),
+(17, 'A renomeação da branch principal.', FALSE),
+
+-- Questão 38 | Correta: A
+(18, 'Especificar arquivos e pastas não rastreados que o Git deve ignorar.', TRUE),
+(18, 'Guardar as senhas do banco de dados em formato legível.', FALSE),
+(18, 'Listar os nomes dos desenvolvedores autorizados no PR.', FALSE),
+(18, 'Impedir a compilação do projeto no ambiente local.', FALSE),
+
+-- Questão 39 | Correta: A
+(19, 'Um padrão no qual as dependências de um objeto são fornecidas externamente em vez de criadas internamente.', TRUE),
+(19, 'Um ataque cibernético focado em injeção de comandos no terminal.', FALSE),
+(19, 'A instalação de softwares adicionais via sistema operacional.', FALSE),
+(19, 'Um processo de limpeza de memória cache.', FALSE),
+
+-- Questão 40 | Correta: A
+(20, 'Uma técnica para mapear tabelas relacionais em classes e objetos na aplicação.', TRUE),
+(20, 'Um protocolo para gerenciamento de rede sem fio.', FALSE),
+(20, 'Um framework visual para desenvolvimento mobile.', FALSE),
+(20, 'Um algoritmo de ordenação de listas de dados.', FALSE);
 
 -- ============================================================
--- VALIDAÇÃO DAS 20 QUESTÕES MÉDIAS DE DS
+-- VALIDAÇÃO DAS 20 QUESTÕES MÉDIAS DE DS II
 -- ============================================================
 
 SELECT
