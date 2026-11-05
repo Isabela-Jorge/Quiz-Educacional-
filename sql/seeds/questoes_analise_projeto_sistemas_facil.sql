@@ -1,35 +1,46 @@
 -- ============================================================
+-- IMPORTANTE:
+-- Os IDs das questões serão consultados após a inserção.
+-- As alternativas serão cadastradas posteriormente
+-- com os IDs reais gerados pelo MySQL.
+--
+-- Não execute novamente este INSERT caso as questões
+-- já estejam cadastradas, para evitar duplicações.
+-- ============================================================
+
+-- ============================================================
 -- PROJETO: Quiz Integrador
 -- DISCIPLINA: Análise e Projeto de Sistemas - Módulo 2
 -- DIFICULDADE: FÁCIL
 -- TOTAL: 20 questões
--- PONTUAÇÃO: 5 pontos por questão
--- TEMPO: 15 segundos por questão
+-- PONTUAÇÃO: 5 pontos
+-- TEMPO: 15 segundos
 -- ============================================================
 
 USE quiz_ds_db;
 
--- Identificar o quiz da disciplina de Análise e Projeto de Sistemas do módulo 2
+-- Identificar automaticamente o quiz da disciplina
 SET @quiz_aps_id = (
     SELECT q.id
     FROM quiz q
-    INNER JOIN disciplina d ON d.id = q.disciplina_id
-    WHERE d.nome LIKE 'Análise e Projeto de Sistemas'
-        AND d.modulo = 2
+    INNER JOIN disciplina d
+        ON d.id = q.disciplina_id
+    WHERE d.nome = 'Análise e Projeto de Sistemas'
+      AND d.modulo = 2
     LIMIT 1
 );
 
--- ============================================================
--- APS | Questões 01 a 20 | Nível fácil
--- ============================================================
+-- ===============================================================
+-- Análise e Projeto de Sistemas | QUESTÕES 01 A 20 | NÍVEL FÁCIL
+-- ===============================================================
 
 INSERT INTO questao (
-    quiz_id, 
-    enunciado, 
-    dificuldade, 
-    pontos, 
+    quiz_id,
+    enunciado,
+    dificuldade,
+    pontos,
     tempo_limite_segundos
-) 
+)
 VALUES
 (@quiz_aps_id, 'Qual é o objetivo principal da análise de sistemas?', 'FACIL', 5, 15),
 (@quiz_aps_id, 'O que é um requisito funcional?', 'FACIL', 5, 15),
@@ -53,137 +64,152 @@ VALUES
 (@quiz_aps_id, 'O que significa priorizar requisitos?', 'FACIL', 5, 15);
 
 -- ============================================================
--- APS | Alternativas das questões 01 a 20
+-- CONSULTAR IDs DAS QUESTÕES FÁCEIS
 -- ============================================================
 
+SELECT
+    id,
+    enunciado,
+    dificuldade,
+    pontos,
+    tempo_limite_segundos
+FROM questao
+WHERE quiz_id = 8
+  AND dificuldade = 'FACIL'
+ORDER BY id;
+
+-- =================================================================
+-- ANÁLISE E PROJETO DE SISTEMAS | ALTERNATIVAS DAS QUESTÕES 01 a 20
+-- =================================================================
+
 INSERT INTO alternativa (
-    questao_id,
-    texto_alternativa,
+    questao_id, 
+    texto_alternativa, 
     is_correta
 )
 VALUES
--- Questão 01 | Correta: C
-(ID_Q1, 'Instalar equipamentos sem planejamento', FALSE),
-(ID_Q1, 'Escolher apenas as cores das telas', FALSE),
-(ID_Q1, 'Compreender necessidades e definir requisitos da solução', TRUE),
-(ID_Q1, 'Substituir testes por reuniões', FALSE),
+-- QUESTÃO 01 - ID 490 | Gabarito: C
+(490, 'Instalar equipamentos sem planejamento', FALSE),
+(490, 'Escolher apenas as cores das telas', FALSE),
+(490, 'Compreender necessidades e definir requisitos da solução', TRUE),
+(490, 'Substituir testes por reuniões', FALSE),
 
--- Questão 02 | Correta: C
-(ID_Q2, 'Uma característica exclusiva do servidor físico', FALSE),
-(ID_Q2, 'Uma estimativa de custo sem relação com funcionalidades', FALSE),
-(ID_Q2, 'Uma capacidade ou comportamento que o sistema deve oferecer', TRUE),
-(ID_Q2, 'Uma regra sobre a cor da parede da empresa', FALSE),
+-- QUESTÃO 02 - ID 491 | Gabarito: C
+(491, 'Uma característica exclusiva do servidor físico', FALSE),
+(491, 'Uma estimativa de custo sem relação com funcionalidades', FALSE),
+(491, 'Uma capacidade ou comportamento que o sistema deve oferecer', TRUE),
+(491, 'Uma regra sobre a cor da parede da empresa', FALSE),
 
--- Questão 03 | Correta D
-(ID_Q3, 'O usuário deve poder cadastrar clientes', FALSE),
-(ID_Q3, 'O aluno deve consultar suas notas', FALSE),
-(ID_Q3, 'O administrador deve excluir um pedido', FALSE),
-(ID_Q3, 'O sistema deve responder às consultas em até dois segundos', TRUE),
+-- QUESTÃO 03 - ID 492 | Gabarito: D
+(492, 'O usuário deve poder cadastrar clientes', FALSE),
+(492, 'O aluno deve consultar suas notas', FALSE),
+(492, 'O administrador deve excluir um pedido', FALSE),
+(492, 'O sistema deve responder às consultas em até dois segundos', TRUE),
 
--- Questão 04 | Correta B
-(ID_Q4, 'Somente quem escreve o código-fonte', FALSE),
-(ID_Q4, 'Pessoa ou organização afetada pelo sistema ou capaz de influenciá-lo', TRUE),
-(ID_Q4, 'Exclusivamente o gerente de infraestrutura', FALSE),
-(ID_Q4, 'Apenas o fornecedor de computadores', FALSE),
+-- QUESTÃO 04 - ID 493 | Gabarito: B
+(493, 'Somente quem escreve o código-fonte', FALSE),
+(493, 'Pessoa ou organização afetada pelo sistema ou capaz de influenciá-lo', TRUE),
+(493, 'Exclusivamente o gerente de infraestrutura', FALSE),
+(493, 'Apenas o fornecedor de computadores', FALSE),
 
--- Questão 05 | Correta C
-(ID_Q5, 'Compilar o código do sistema', FALSE),
-(ID_Q5, 'Executar testes automatizados no banco', FALSE),
-(ID_Q5, 'Coletar informações diretamente com pessoas envolvidas no processo', TRUE),
-(ID_Q5, 'Publicar a aplicação em produção', FALSE),
+-- QUESTÃO 05 - ID 494 | Gabarito: C
+(494, 'Compilar o código do sistema', FALSE),
+(494, 'Executar testes automatizados no banco', FALSE),
+(494, 'Coletar informações diretamente com pessoas envolvidas no processo', TRUE),
+(494, 'Publicar a aplicação em produção', FALSE),
 
--- Questão 06 | Correta D
-(ID_Q6, 'Um arquivo de configuração do navegador', FALSE),
-(ID_Q6, 'Uma cópia integral do código-fonte', FALSE),
-(ID_Q6, 'Uma lista de marcas de computadores', FALSE),
-(ID_Q6, 'Uma interação entre um ator e o sistema para alcançar um objetivo', TRUE),
+-- QUESTÃO 06 - ID 495 | Gabarito: D
+(495, 'Um arquivo de configuração do navegador', FALSE),
+(495, 'Uma cópia integral do código-fonte', FALSE),
+(495, 'Uma lista de marcas de computadores', FALSE),
+(495, 'Uma interação entre um ator e o sistema para alcançar um objetivo', TRUE),
 
--- Questão 07 | Correta C
-(ID_Q7, 'Uma tabela do banco de dados', FALSE),
-(ID_Q7, 'Uma classe abstrata do código', FALSE),
-(ID_Q7, 'Um papel externo que interage com o sistema', TRUE),
-(ID_Q7, 'Obrigatoriamente um funcionário humano', FALSE),
+-- QUESTÃO 07 - ID 496 | Gabarito: C
+(496, 'Uma tabela do banco de dados', FALSE),
+(496, 'Uma classe abstrata do código', FALSE),
+(496, 'Um papel externo que interage com o sistema', TRUE),
+(496, 'Obrigatoriamente um funcionário humano', FALSE),
 
--- Questão 08 | Correta C
-(ID_Q8, 'Diagrama de implantação', FALSE),
-(ID_Q8, 'Diagrama de sequência', FALSE),
-(ID_Q8, 'Diagrama de classes', TRUE),
-(ID_Q8, 'Diagrama de atividades', FALSE),
+-- QUESTÃO 08 - ID 497 | Gabarito: C
+(497, 'Diagrama de implantação', FALSE),
+(497, 'Diagrama de sequência', FALSE),
+(497, 'Diagrama de classes', TRUE),
+(497, 'Diagrama de atividades', FALSE),
 
--- Questão 09 | Correta D
-(ID_Q9, 'Criar automaticamente o banco de dados', FALSE),
-(ID_Q9, 'Garantir ausência de qualquer defeito', FALSE),
-(ID_Q9, 'Substituir toda a documentação de requisitos', FALSE),
-(ID_Q9, 'Permitir visualizar e discutir uma proposta de interação antes da implementação completa', TRUE),
+-- QUESTÃO 09 - ID 498 | Gabarito: D
+(498, 'Criar automaticamente o banco de dados', FALSE),
+(498, 'Garantir ausência de qualquer defeito', FALSE),
+(498, 'Substituir toda a documentação de requisitos', FALSE),
+(498, 'Permitir visualizar e discutir uma proposta de interação antes da implementação completa', TRUE),
 
--- Questão 10 | Correta A
-(ID_Q10, 'Uma restrição ou política que orienta operações do domínio', TRUE),
-(ID_Q10, 'Um atalho de teclado do desenvolvedor', FALSE),
-(ID_Q10, 'Uma preferência pessoal sobre o editor de código', FALSE),
-(ID_Q10, 'Um componente obrigatório do hardware', FALSE),
+-- QUESTÃO 10 - ID 499 | Gabarito: A
+(499, 'Uma restrição ou política que orienta operações do domínio', TRUE),
+(499, 'Um atalho de teclado do desenvolvedor', FALSE),
+(499, 'Uma preferência pessoal sobre o editor de código', FALSE),
+(499, 'Um componente obrigatório do hardware', FALSE),
 
--- Questão 11 | Correta C
-(ID_Q11, 'Executar apenas o instalador do sistema', FALSE),
-(ID_Q11, 'Escolher a linguagem sem consultar ninguém', FALSE),
-(ID_Q11, 'Confirmar que os requisitos refletem suas necessidades e expectativas', TRUE),
-(ID_Q11, 'Apagar requisitos antigos sem análise', FALSE),
+-- QUESTÃO 11 - ID 500 | Gabarito: C
+(500, 'Executar apenas o instalador do sistema', FALSE),
+(500, 'Escolher a linguagem sem consultar ninguém', FALSE),
+(500, 'Confirmar que os requisitos refletem suas necessidades e expectativas', TRUE),
+(500, 'Apagar requisitos antigos sem análise', FALSE),
 
--- Questão 12 | Correta C
-(ID_Q12, 'Diagrama de implantação', FALSE),
-(ID_Q12, 'Diagrama de componentes', FALSE),
-(ID_Q12, 'Diagrama de atividades', TRUE),
-(ID_Q12, 'Diagrama de pacotes', FALSE),
+-- QUESTÃO 12 - ID 501 | Gabarito: C
+(501, 'Diagrama de implantação', FALSE),
+(501, 'Diagrama de componentes', FALSE),
+(501, 'Diagrama de atividades', TRUE),
+(501, 'Diagrama de pacotes', FALSE),
 
--- Questão 13 | Correta D
-(ID_Q13, 'Velocidade da conexão à internet', FALSE),
-(ID_Q13, 'Quantidade de linhas de código já escritas', FALSE),
-(ID_Q13, 'Lista exclusiva de senhas de acesso', FALSE),
-(ID_Q13, 'Delimitação do que será e do que não será entregue', TRUE),
+-- QUESTÃO 13 - ID 502 | Gabarito: D
+(502, 'Velocidade da conexão à internet', FALSE),
+(502, 'Quantidade de linhas de código já escritas', FALSE),
+(502, 'Lista exclusiva de senhas de acesso', FALSE),
+(502, 'Delimitação do que será e do que não será entregue', TRUE),
 
--- Questão 14 | Correta C
-(ID_Q14, 'Descrever somente preferências pessoais', FALSE),
-(ID_Q14, 'Utilizar expressões vagas como ''bem rápido''', FALSE),
-(ID_Q14, 'Definir uma condição observável e mensurável', TRUE),
-(ID_Q14, 'Evitar qualquer critério de aceitação', FALSE),
+-- QUESTÃO 14 - ID 503 | Gabarito: C
+(503, 'Descrever somente preferências pessoais', FALSE),
+(503, 'Utilizar expressões vagas como bem rápido', FALSE),
+(503, 'Definir uma condição observável e mensurável', TRUE),
+(503, 'Evitar qualquer critério de aceitação', FALSE),
 
--- Questão 15 | Correta D
-(ID_Q15, 'Uma cópia obrigatória do banco de dados', FALSE),
-(ID_Q15, 'Uma mudança de linguagem de programação', FALSE),
-(ID_Q15, 'Um arquivo de log do servidor', FALSE),
-(ID_Q15, 'Um caminho diferente do fluxo principal sob determinada condição', TRUE),
+-- QUESTÃO 15 - ID 504 | Gabarito: D
+(504, 'Uma cópia obrigatória do banco de dados', FALSE),
+(504, 'Uma mudança de linguagem de programação', FALSE),
+(504, 'Um arquivo de log do servidor', FALSE),
+(504, 'Um caminho diferente do fluxo principal sob determinada condição', TRUE),
 
--- Questão 16 | Correta C
-(ID_Q16, 'Listar somente os custos de licenciamento', FALSE),
-(ID_Q16, 'Representar apenas a disposição física de servidores', FALSE),
-(ID_Q16, 'Mostrar a troca de mensagens entre participantes ao longo do tempo', TRUE),
-(ID_Q16, 'Definir cores e fontes da interface', FALSE),
+-- QUESTÃO 16 - ID 505 | Gabarito: C
+(505, 'Listar somente os custos de licenciamento', FALSE),
+(505, 'Representar apenas a disposição física de servidores', FALSE),
+(505, 'Mostrar a troca de mensagens entre participantes ao longo do tempo', TRUE),
+(505, 'Definir cores e fontes da interface', FALSE),
 
--- Questão 17 | Correta C
-(ID_Q17, 'Uma decisão sobre o logotipo da empresa', FALSE),
-(ID_Q17, 'Um prazo de reunião da equipe', FALSE),
-(ID_Q17, 'Uma condição que protege informações e operações do sistema', TRUE),
-(ID_Q17, 'Uma funcionalidade exclusiva de emissão de relatórios', FALSE),
+-- QUESTÃO 17 - ID 506 | Gabarito: C
+(506, 'Uma decisão sobre o logotipo da empresa', FALSE),
+(506, 'Um prazo de reunião da equipe', FALSE),
+(506, 'Uma condição que protege informações e operações do sistema', TRUE),
+(506, 'Uma funcionalidade exclusiva de emissão de relatórios', FALSE),
 
--- Questão 18 | Correta D
-(ID_Q18, 'Somente a execução de consultas SQL', FALSE),
-(ID_Q18, 'Exclusivamente a montagem de computadores', FALSE),
-(ID_Q18, 'Uma lista de bibliotecas de programação', FALSE),
-(ID_Q18, 'Conjunto de atividades relacionadas que produz um resultado para a organização', TRUE),
+-- QUESTÃO 18 - ID 507 | Gabarito: D
+(507, 'Somente a execução de consultas SQL', FALSE),
+(507, 'Exclusivamente a montagem de computadores', FALSE),
+(507, 'Uma lista de bibliotecas de programação', FALSE),
+(507, 'Conjunto de atividades relacionadas que produz um resultado para a organização', TRUE),
 
--- Questão 19 | Correta D
-(ID_Q19, 'Substituir todos os testes de aceitação', FALSE),
-(ID_Q19, 'Dispensar comunicação entre participantes', FALSE),
-(ID_Q19, 'Garantir que nenhuma mudança ocorrerá', FALSE),
-(ID_Q19, 'Registrar o comportamento esperado e apoiar entendimento, implementação e testes', TRUE),
+-- QUESTÃO 19 - ID 508 | Gabarito: D
+(508, 'Substituir todos os testes de aceitação', FALSE),
+(508, 'Dispensar comunicação entre participantes', FALSE),
+(508, 'Garantir que nenhuma mudança ocorrerá', FALSE),
+(508, 'Registrar o comportamento esperado e apoiar entendimento, implementação e testes', TRUE),
 
--- Questão 20 | Correta D
-(ID_Q20, 'Organizar arquivos somente por tamanho', FALSE),
-(ID_Q20, 'Eliminar todos os requisitos não funcionais', FALSE),
-(ID_Q20, 'Ordenar desenvolvedores por idade', FALSE),
-(ID_Q20, 'Definir sua ordem de importância ou implementação segundo critérios do projeto', TRUE);
+-- QUESTÃO 20 - ID 509 | Gabarito: D
+(509, 'Organizar arquivos somente por tamanho', FALSE),
+(509, 'Eliminar todos os requisitos não funcionais', FALSE),
+(509, 'Ordenar desenvolvedores por idade', FALSE),
+(509, 'Definir sua ordem de importância ou implementação segundo critérios do projeto', TRUE);
 
 -- ============================================================
--- VALIDAÇÃO DAS 20 QUESTÕES FÁCEIS DE APS
+-- VALIDAÇÃO DAS 20 QUESTÕES FÁCEIS
 -- ============================================================
 
 SELECT
@@ -192,14 +218,15 @@ SELECT
     COUNT(a.id) AS total_alternativas,
     COALESCE(SUM(a.is_correta), 0) AS alternativas_corretas,
     CASE
-        WHEN COUNT(a.id) = 4 
-         AND COALESCE(SUM(a.is_correta), 0) = 1 
+        WHEN COUNT(a.id) = 4
+         AND COALESCE(SUM(a.is_correta), 0) = 1
         THEN 'OK'
-        ELSE 'VERIFICAR'
+        ELSE 'ERRO'
     END AS validacao
 FROM questao q
-LEFT JOIN alternativa a ON a.questao_id = q.id
-WHERE q.quiz_id = @quiz_aps_id
+LEFT JOIN alternativa a
+    ON a.questao_id = q.id
+WHERE q.quiz_id = 8
   AND q.dificuldade = 'FACIL'
 GROUP BY q.id, q.enunciado
 ORDER BY q.id;
