@@ -49,3 +49,25 @@ BUG-005 – Campo de nome completo não da para fazer alterações
 - Atual: Não é possível digitar no campo de nome completo.
 - Status: 🔴 Aberto
 - Retestado: ❌
+
+
+
+BUG-006 – Falha ao processar resposta do servidor no cadastro (Erro de JSON)
+
+- Tela: Cadastro (Criar Conta)
+- Problema: Ao tentar realizar o cadastro, o sistema exibe o erro técnico "Failed to execute 'json' on 'Response': Unexpected end of JSON input" na interface. Isso ocorre quando o servidor retorna uma resposta vazia ou ocorre falha na comunicação com o backend/banco de dados, e o frontend não trata a exceção adequadamente.
+- Esperado: O sistema deve concluir o cadastro com sucesso ou, em caso de falha no servidor, exibir uma mensagem amigável e clara em português para o usuário (ex: "Erro ao conectar com o servidor. Tente novamente.").
+- Atual: O cadastro falha e exibe uma mensagem de erro técnico de código em inglês diretamente na tela.
+- Status: 🔴 Aberto
+- Retestado: ❌
+
+----------------------------------------
+
+BUG-007 – Campo de nome permite números e caracteres especiais
+
+- Tela: Cadastro (Criar Conta)
+- Problema: O campo de nome permite inserir números e símbolos especiais (ex: "e9du ardo%").
+- Esperado: O sistema deve aceitar apenas letras e espaços no campo de nome, bloqueando números e caracteres especiais.
+- Atual: O sistema permite preencher o campo de nome com números e caracteres especiais sem exibir alerta de validação.
+- Status: 🔴 Aberto
+- Retestado: ❌
